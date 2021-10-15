@@ -15,6 +15,16 @@ class CreateInformationRequestsTable extends Migration
     {
         Schema::create('information_requests', function (Blueprint $table) {
             $table->id();
+
+            $table->string('title');
+            $table->longText('description');
+            $table->string('location');
+            $table->bigInteger('categories_id');
+            $table->bigInteger('users_id');
+            $table->string('attachment');
+            $table->string('slug')->unique();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }
