@@ -21,7 +21,9 @@ class CreateAspirationsTable extends Migration
             $table->string('location');
             $table->bigInteger('categories_id');
             $table->bigInteger('users_id');
-            $table->string('attachment');
+            $table->integer('status')->default(1);
+            $table->integer('privacy')->default(1);
+            $table->string('attachment')->nullable();
             $table->string('slug')->unique();
 
             $table->softDeletes();
