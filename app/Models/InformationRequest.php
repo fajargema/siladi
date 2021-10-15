@@ -13,4 +13,14 @@ class InformationRequest extends Model
     protected $fillable = [
         'title', 'description', 'location', 'categories_id', 'users_id', 'attachment', 'slug'
     ];
+
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id', 'categories_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id');
+    }
 }
