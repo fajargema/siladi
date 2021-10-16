@@ -21,6 +21,10 @@
                         <i class='bx bx-book-content mr-1'></i> {{ __('Category') }}
                     </x-jet-nav-link>
 
+                    <x-jet-nav-link href="{{ route('dashboard.aspiration.index') }}" :active="request()->routeIs('dashboard.aspiration.index')">
+                        <i class='bx bx-book-content mr-1'></i> {{ __('Aspiration') }}
+                    </x-jet-nav-link>
+
                 </div>
             </div>
 

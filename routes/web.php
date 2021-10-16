@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AspirationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -24,5 +25,6 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
         Route::get('/', [DashboardController::class, 'index'])->name('index');
 
         Route::resource('category', CategoryController::class);
+        Route::resource('aspiration', AspirationController::class);
     });
 });

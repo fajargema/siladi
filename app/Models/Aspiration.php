@@ -11,7 +11,7 @@ class Aspiration extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title', 'description', 'location', 'categories_id', 'users_id', 'attachment', 'slug'
+        'title', 'description', 'location', 'categories_id', 'users_id', 'attachment', 'slug', 'privacy'
     ];
 
     public function category()
@@ -22,5 +22,11 @@ class Aspiration extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'users_id');
+    }
+
+    function delete_image()
+    {
+        if ($this->attachment && file_exists(public_path($this->attachment)))
+            return unlink(public_path($this->attachment));
     }
 }
