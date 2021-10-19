@@ -18,11 +18,15 @@
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('dashboard.category.index') }}" :active="request()->routeIs('dashboard.category.index')">
-                        <i class='bx bx-book-content mr-1'></i> {{ __('Category') }}
+                        <i class='bx bx-book-content mr-1'></i> {{ __('Kategori') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('dashboard.complaint.index') }}" :active="request()->routeIs('dashboard.complaint.index')">
+                        <i class='bx bx-book-content mr-1'></i> {{ __('Pengaduan') }}
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('dashboard.aspiration.index') }}" :active="request()->routeIs('dashboard.aspiration.index')">
-                        <i class='bx bx-book-content mr-1'></i> {{ __('Aspiration') }}
+                        <i class='bx bx-book-content mr-1'></i> {{ __('Aspirasi') }}
                     </x-jet-nav-link>
 
                 </div>
@@ -154,7 +158,15 @@
             </x-jet-responsive-nav-link>
 
             <x-jet-responsive-nav-link href="{{ route('dashboard.category.index') }}" :active="request()->routeIs('dashboard.category.index')">
-                <i class='bx bx-book-content mr-1'></i> {{ __('Category') }}
+                <i class='bx bx-book-content mr-1'></i> {{ __('Kategori') }}
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('dashboard.complaint.index') }}" :active="request()->routeIs('dashboard.complaint.index')">
+                <i class='bx bx-book-content mr-1'></i> {{ __('Pengaduan') }}
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('dashboard.aspiration.index') }}" :active="request()->routeIs('dashboard.aspiration.index')">
+                <i class='bx bx-book-content mr-1'></i> {{ __('Aspirasi') }}
             </x-jet-responsive-nav-link>
 
         </div>
