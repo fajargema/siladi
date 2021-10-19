@@ -16,6 +16,7 @@
                     { data: 'DT_RowIndex', width: '5%' },
                     { data: 'title', name: 'title' },
                     { data: 'category.name', name: 'category.name' },
+                    { data: 'status', name: 'status' },
                     { data: 'created_at', name: 'created_at' },
                     {
                         data: 'action',
@@ -48,6 +49,7 @@
                                 <th>ID</th>
                                 <th>Judul</th>
                                 <th>Kategori</th>
+                                <th>Status</th>
                                 <th>Dibuat</th>
                                 <th>Aksi</th>
                             </tr>

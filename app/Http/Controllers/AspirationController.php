@@ -47,7 +47,21 @@ class AspirationController extends Controller
                 ->editColumn('created_at', function ($item) {
                     return Carbon::parse($item->created_at)->diffForHumans();
                 })
-                ->rawColumns(['action', 'created_at'])
+                ->editColumn('status', function ($item) {
+                    if ($item->status == 1)
+                        return '<span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
+                            Belum
+                        </span>';
+                    elseif ($item->status == 2)
+                        return '<span class="bg-blue-200 text-blue-600 py-1 px-3 rounded-full text-xs">
+                            Proses
+                        </span>';
+                    elseif ($item->status == 3)
+                        return '<span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
+                            Selesai
+                        </span>';
+                })
+                ->rawColumns(['action', 'created_at', 'status'])
                 ->make();
         }
         return view('pages.dashboard.aspiration.index');
@@ -117,9 +131,14 @@ class AspirationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Aspiration $aspiration, User $user)
     {
-        //
+        if (request()->ajax()) {
+            $query = Aspiration::with(['category', 'user'])->where('categories_id', $aspiration->id);
+            return DataTables::of($query)
+                ->make();
+        }
+        return view('pages.dashboard.aspiration.detail', compact('aspiration'));
     }
 
     /**
