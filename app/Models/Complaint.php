@@ -11,7 +11,7 @@ class Complaint extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title', 'description', 'date', 'location', 'categories_id', 'users_id', 'attachment', 'slug'
+        'title', 'description', 'date', 'location', 'categories_id', 'users_id', 'attachment', 'slug', 'privacy'
     ];
 
     public function category()
