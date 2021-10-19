@@ -89,13 +89,10 @@ class AspirationController extends Controller
         $awal = 'ASP';
         $dua = 'SILADI';
         $akhir = Aspiration::max('id');
-        $no = 1;
 
         if ($request->file('attachment') !== null) {
             $attachment = $request->file('attachment');
             $attachment->storeAs('public/aspiration', $attachment->hashName());
-
-
 
             Aspiration::create([
                 'attachment'     => $attachment->hashName(),

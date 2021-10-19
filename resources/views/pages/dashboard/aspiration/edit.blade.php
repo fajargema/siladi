@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Aspiration &raquo; Create
+            Aspirasi &raquo; Edit
         </h2>
     </x-slot>
 
@@ -33,30 +33,30 @@
 
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
-                            <label for="title" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Title</label>
-                            <input type="text" name="title" value="{{ old('title') ?? $aspiration->title }}" placeholder="Title" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                            <label for="title" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Judul Aspirasi</label>
+                            <input type="text" name="title" value="{{ old('title') ?? $aspiration->title }}" placeholder="Ketik Judul Aspirasi" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                         </div>
                     </div>
 
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
-                            <label for="description" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Description</label>
+                            <label for="description" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Isi Aspirasi</label>
                             <textarea name="description" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">{!! old('description') ?? $aspiration->description !!}</textarea>
                         </div>
                     </div>
 
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
-                            <label for="location" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Location</label>
+                            <label for="location" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Asal Pelapor</label>
                             <input type="text" name="location" value="{{ old('location') ?? $aspiration->location }}" placeholder="Location" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                         </div>
                     </div>
 
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
-                            <label for="name" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Name</label>
+                            <label for="name" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Kategori Aspirasi</label>
                             <select name="categories_id" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                <option disabled>-----Edit Category-----</option>
+                                <option disabled>-----Edit Kategori-----</option>
                                 @foreach($category as $v)
                                     <option value="{{ $v->id }}" @if($aspiration->categories_id === $v->id) selected="selected" @endif>{{ $v->name }}</option>
                                 @endforeach
@@ -66,16 +66,12 @@
 
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
-                            <label for="privacy" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Privacy</label>
+                            <label for="privacy" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Privasi</label>
                             <input type="radio" value="2" name="privacy"> Anonim
                             <input type="radio" value="3" name="privacy"> Rahasia
-                        </div>
-                    </div>
 
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full px-3">
-                            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
-                                Update Aspiration
+                            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-10 rounded shadow-lg float-right">
+                                Edit Aspirasi
                             </button>
                         </div>
                     </div>

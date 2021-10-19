@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Aspiration') }}
+            {{ __('Aspirasi') }}
         </h2>
     </x-slot>
 
@@ -37,7 +37,7 @@
                 <a href="{{ route('dashboard.aspiration.create') }}"
                     class="bg-green-500 hover:bg-green-700 text-white
                     font-bold py-2 px-4 rounded shadow-lg">
-                    <i class='bx bx-plus-medical'></i> Create Aspiration
+                    <i class='bx bx-plus-medical'></i> Buat Aspirasi
                 </a>
             </div>
 

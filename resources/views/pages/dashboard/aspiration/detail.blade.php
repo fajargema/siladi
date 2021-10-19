@@ -1,20 +1,32 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Aspiration &raquo; #{{ $aspiration->id }} {{ $aspiration->title }}
+            Aspirasi &raquo; #{{ $aspiration->id }} {{ $aspiration->title }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <h2 class="font-semibold text-lg text-gray-800 leading-tight mb-5">
-                Aspiration Details
+                Detail Aspirasi
             </h2>
 
             <div class="bg-white overflow-hidden shadow sm:rounded-lg mb-10">
                 <div class="p-6 bg-white">
                     <table class="table-auto w-full" border="0">
                         <tbody>
+                            <tr>
+                                <th class=" px-6 py-4 text-left">Lampiran</th>
+                                <td>:</td>
+                                <td class=" px-6 py-4">
+                                    @if ($aspiration->attachment == null)
+                                        Tidak ada gambar
+                                    @else
+                                    <img style="max-width: 500px" src="{{ Storage::url('aspiration/'.$aspiration->attachment) }}"/>
+                                    @endif
+
+                                </td>
+                            </tr>
                             <tr>
                                 <th class=" px-6 py-4 text-left">Status</th>
                                 <td>:</td>
@@ -35,45 +47,35 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class=" px-6 py-4 text-left">Kode</th>
+                                <th class=" px-6 py-4 text-left">Kode Aspirasi</th>
                                 <td>:</td>
                                 <td class=" px-6 py-4">{{ $aspiration->kode }}</td>
                             </tr>
-                            <tr>
-                                <th class=" px-6 py-4 text-left">Lampiran</th>
-                                <td>:</td>
-                                <td class=" px-6 py-4">
-                                    @if ($aspiration->attachment == null)
-                                        Tidak ada gambar
-                                    @else
-                                    <img style="max-width: 150px" src="{{ Storage::url('aspiration/'.$aspiration->attachment) }}"/>
-                                    @endif
 
-                                </td>
-                            </tr>
                             <tr>
-                                <th class=" px-6 py-4 text-left">Title</th>
+                                <th class=" px-6 py-4 text-left">Judul Aspirasi</th>
                                 <td>:</td>
                                 <td class=" px-6 py-4">{{ $aspiration->title }}</td>
                             </tr>
                             <tr>
-                                <th class=" px-6 py-4 text-left">Slug</th>
-                                <td>:</td>
-                                <td class=" px-6 py-4">{{ $aspiration->slug }}</td>
-                            </tr>
-                            <tr>
-                                <th class=" px-6 py-4 text-left">Kategori</th>
+                                <th class=" px-6 py-4 text-left">Kategori Aspirasi</th>
                                 <td>:</td>
                                 <td class=" px-6 py-4">{{ $aspiration->category->name }}</td>
                             </tr>
                             <tr>
-                                <th class=" px-6 py-4 text-left">Pelapor</th>
+                                <th class=" px-6 py-4 text-left">Nama Pelapor</th>
                                 <td>:</td>
-                                <td class=" px-6 py-4">{{ $aspiration->user->name }}</td>
+                                <td class=" px-6 py-4">
+                                    @if ($aspiration->privacy == 1)
+                                        {{ $aspiration->user->name }}
+                                    @elseif ($aspiration->privacy == 2)
+                                        {{ $result = substr($aspiration->user->name, 0, 1) . preg_replace('/[^@]/', '*', substr($aspiration->user->name, 1)) }}
+                                    @endif
+                                </td>
                             </tr>
 
                             <tr>
-                                <th class=" px-6 py-4 text-left">Description</th>
+                                <th class=" px-6 py-4 text-left">Isi Aspirasi</th>
                                 <td>:</td>
                                 <td class=" px-6 py-4">{!! $aspiration->description !!}</td>
                             </tr>
