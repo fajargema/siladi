@@ -144,9 +144,11 @@ class ComplaintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Complaint $complaint)
     {
-        //
+        $category = Category::all();
+
+        return view('pages.dashboard.complaint.edit', compact('complaint', 'category'));
     }
 
     /**
@@ -156,9 +158,13 @@ class ComplaintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Complaint $complaint)
     {
-        //
+        $data = $request->all();
+
+        $complaint->update($data);
+
+        return redirect()->route('dashboard.complaint.index');
     }
 
     /**
