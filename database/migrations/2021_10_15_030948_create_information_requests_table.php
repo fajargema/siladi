@@ -16,6 +16,7 @@ class CreateInformationRequestsTable extends Migration
         Schema::create('information_requests', function (Blueprint $table) {
             $table->id();
 
+            $table->string('kode')->index();
             $table->string('title');
             $table->longText('description');
             $table->string('location');

@@ -72,12 +72,20 @@ class AspirationController extends Controller
      */
     public function store(AspirationRequest $request)
     {
+        $awal = 'ASP';
+        $dua = 'SILADI';
+        $akhir = Aspiration::max('id');
+        $no = 1;
+
         if ($request->file('attachment') !== null) {
             $attachment = $request->file('attachment');
             $attachment->storeAs('public/aspiration', $attachment->hashName());
 
+
+
             Aspiration::create([
                 'attachment'     => $attachment->hashName(),
+                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
                 'title'     => $request->title,
                 'description'   => $request->description,
                 'location'   => $request->location,
@@ -89,6 +97,7 @@ class AspirationController extends Controller
         } else {
             Aspiration::create([
                 'attachment'     => $request->attachment,
+                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
                 'title'     => $request->title,
                 'description'   => $request->description,
                 'location'   => $request->location,

@@ -16,6 +16,7 @@ class CreateComplaintsTable extends Migration
         Schema::create('complaints', function (Blueprint $table) {
             $table->id();
 
+            $table->string('kode')->index();
             $table->string('title');
             $table->longText('description');
             $table->date('date');
