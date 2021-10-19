@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class ComplaintController extends Controller
 {
@@ -23,15 +24,15 @@ class ComplaintController extends Controller
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
                     return '
-                        <a href="' . route('dashboard.aspiration.show', $item->id) . '"
+                        <a href="' . route('dashboard.complaint.show', $item->id) . '"
                             class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-1 px-2 m-1 rounded shadow-lg">
                             <i class="bx bx-detail"></i> Detail
                         </a>
-                        <a href="' . route('dashboard.aspiration.edit', $item->id) . '"
+                        <a href="' . route('dashboard.complaint.edit', $item->id) . '"
                             class="bg-gray-800 hover:bg-black text-white font-bold py-1 px-2 m-1 rounded shadow-lg">
                             <i class="bx bxs-pencil"></i> Edit
                         </a>
-                        <form class="inline-block" action="' . route('dashboard.aspiration.destroy', $item->id) . '" method="POST">
+                        <form class="inline-block" action="' . route('dashboard.complaint.destroy', $item->id) . '" method="POST">
                             <button type="submit"
                                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 m-1 rounded shadow-lg">
                                     <i class="bx bx-trash"></i> Hapus
@@ -42,7 +43,9 @@ class ComplaintController extends Controller
                 })
                 ->addIndexColumn()
                 ->editColumn('date', function ($item) {
-                    return $item->date->isoFormat('dddd, D MMMM Y');
+                    $date = Carbon::parse($item->date)->locale('id');
+                    $date->settings(['formatFunction' => 'translatedFormat']);
+                    return $date->format('l, j F Y');
                 })
                 ->editColumn('created_at', function ($item) {
                     return Carbon::parse($item->created_at)->diffForHumans();
@@ -61,7 +64,7 @@ class ComplaintController extends Controller
                             Selesai
                         </span>';
                 })
-                ->rawColumns(['action', 'created_at', 'status'])
+                ->rawColumns(['action', 'date', 'created_at', 'status'])
                 ->make();
         }
         return view('pages.dashboard.complaint.index');
@@ -74,7 +77,8 @@ class ComplaintController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all();
+        return view('pages.dashboard.complaint.create', compact('category'));
     }
 
     /**
@@ -85,7 +89,42 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $awal = 'PEN';
+        $dua = 'SILADI';
+        $akhir = Complaint::max('id');
+
+        if ($request->file('attachment') !== null) {
+            $attachment = $request->file('attachment');
+            $attachment->storeAs('public/complaint', $attachment->hashName());
+
+            Complaint::create([
+                'attachment'     => $attachment->hashName(),
+                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
+                'title'     => $request->title,
+                'description'   => $request->description,
+                'date'   => $request->date,
+                'location'   => $request->location,
+                'privacy'   => $request->privacy,
+                'categories_id'   => $request->categories_id,
+                'users_id'   => $request->users_id,
+                'slug' => Str::slug($request->title)
+            ]);
+        } else {
+            Complaint::create([
+                'attachment'     => $request->attachment,
+                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
+                'title'     => $request->title,
+                'description'   => $request->description,
+                'date'   => $request->date,
+                'location'   => $request->location,
+                'privacy'   => $request->privacy,
+                'categories_id'   => $request->categories_id,
+                'users_id'   => $request->users_id,
+                'slug' => Str::slug($request->title)
+            ]);
+        }
+
+        return redirect()->route('dashboard.complaint.index');
     }
 
     /**
