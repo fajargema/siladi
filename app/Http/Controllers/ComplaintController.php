@@ -173,8 +173,12 @@ class ComplaintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Complaint $complaint)
     {
-        //
+        unlink("storage/complaint" . $complaint->attachment);
+
+        $complaint->delete();
+
+        return redirect()->route('dashboard.complaint.index');
     }
 }
