@@ -26,5 +26,7 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
 
         Route::resource('category', CategoryController::class);
         Route::resource('aspiration', AspirationController::class);
+        Route::post('/proses-asp/{id}', [AspirationController::class, 'setProses'])->name('proses-asp');
+        Route::post('/selesai-asp/{id}', [AspirationController::class, 'setSelesai'])->name('selesai-asp');
     });
 });

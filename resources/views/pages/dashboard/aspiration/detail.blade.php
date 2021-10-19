@@ -15,6 +15,23 @@
                 <div class="p-6 bg-white">
                     <table class="table-auto w-full" border="0">
                         <tbody>
+                            @if ($aspiration->status == 1)
+                                <form class="inline-block" action="{{ route('dashboard.proses-asp', $aspiration->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit"
+                                            class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-1 px-2 m-1 rounded shadow-lg">
+                                            <i class="bx bx-recycle"></i> Proses
+                                    </button>
+                                </form>
+                            @elseif ($aspiration->status == 2)
+                                <form class="inline-block" action="{{ route('dashboard.selesai-asp', $aspiration->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit"
+                                            class="bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-2 m-1 rounded shadow-lg">
+                                            <i class="bx bx-transfer-alt"></i> Selesai
+                                    </button>
+                                </form>
+                            @endif
                             <tr>
                                 <th class=" px-6 py-4 text-left">Lampiran</th>
                                 <td>:</td>

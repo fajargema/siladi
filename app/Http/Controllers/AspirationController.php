@@ -181,4 +181,18 @@ class AspirationController extends Controller
 
         return redirect()->route('dashboard.aspiration.index');
     }
+
+    public function setProses($id)
+    {
+        Aspiration::where('id', $id)->update(array('status' => 2));
+
+        return redirect()->route('dashboard.aspiration.index');
+    }
+
+    public function setSelesai($id)
+    {
+        Aspiration::where('id', $id)->update(array('status' => 3));
+
+        return redirect()->route('dashboard.aspiration.index');
+    }
 }
