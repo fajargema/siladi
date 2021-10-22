@@ -32,6 +32,8 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
         Route::post('/selesai-asp/{id}', [AspirationController::class, 'setSelesai'])->name('selesai-asp');
 
         Route::resource('complaint', ComplaintController::class);
+        Route::post('/proses-pen/{id}', [ComplaintController::class, 'setProses'])->name('proses-pen');
+        Route::post('/selesai-pen/{id}', [ComplaintController::class, 'setSelesai'])->name('selesai-pen');
 
         Route::resource('information', InformationRequestController::class);
     });

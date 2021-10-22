@@ -84,7 +84,7 @@ class AspirationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AspirationRequest $request)
+    public function store(Request $request)
     {
         $awal = 'ASP';
         $dua = 'SILADI';

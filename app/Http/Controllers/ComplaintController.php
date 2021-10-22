@@ -191,4 +191,18 @@ class ComplaintController extends Controller
 
         return redirect()->route('dashboard.complaint.index');
     }
+
+    public function setProses($id)
+    {
+        Complaint::where('id', $id)->update(array('status' => 2));
+
+        return redirect()->route('dashboard.complaint.index');
+    }
+
+    public function setSelesai($id)
+    {
+        Complaint::where('id', $id)->update(array('status' => 3));
+
+        return redirect()->route('dashboard.complaint.index');
+    }
 }
