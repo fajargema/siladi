@@ -165,8 +165,12 @@ class InformationRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(InformationRequest $information)
     {
-        //
+        unlink("storage/information/" . $information->attachment);
+
+        $information->delete();
+
+        return redirect()->route('dashboard.information.index');
     }
 }
