@@ -4,6 +4,7 @@ use App\Http\Controllers\AspirationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InformationRequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
         Route::post('/selesai-asp/{id}', [AspirationController::class, 'setSelesai'])->name('selesai-asp');
 
         Route::resource('complaint', ComplaintController::class);
+
+        Route::resource('information', InformationRequestController::class);
     });
 });
