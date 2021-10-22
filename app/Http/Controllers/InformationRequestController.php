@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\InformationRequest;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -125,9 +126,14 @@ class InformationRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(InformationRequest $information, User $user)
     {
-        //
+        if (request()->ajax()) {
+            $query = InformationRequest::with(['category', 'user'])->where('categories_id', $information->id);
+            return DataTables::of($query)
+                ->make();
+        }
+        return view('pages.dashboard.information.detail', compact('information'));
     }
 
     /**
