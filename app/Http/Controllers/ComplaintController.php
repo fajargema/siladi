@@ -133,9 +133,19 @@ class ComplaintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Complaint $complaint, User $user)
     {
-        //
+        if (request()->ajax()) {
+            $query = Complaint::with(['category', 'user'])->where('categories_id', $complaint->id);
+            return DataTables::of($query)
+                ->make();
+        }
+
+        $date = Carbon::parse($complaint->date)->locale('id');
+        $date->settings(['formatFunction' => 'translatedFormat']);
+        $fdate = $date->format('l, j F Y');
+
+        return view('pages.dashboard.complaint.detail', compact('complaint', 'fdate'));
     }
 
     /**
