@@ -11,7 +11,7 @@ class InformationRequest extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title', 'description', 'location', 'categories_id', 'users_id', 'attachment', 'slug'
+        'kode', 'title', 'description', 'location', 'categories_id', 'users_id', 'attachment', 'slug', 'privacy'
     ];
 
     public function category()

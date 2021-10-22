@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\InformationRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class InformationRequestController extends Controller
 {
@@ -69,7 +71,8 @@ class InformationRequestController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all();
+        return view('pages.dashboard.information.create', compact('category'));
     }
 
     /**
@@ -80,7 +83,40 @@ class InformationRequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $awal = 'INF';
+        $dua = 'SILADI';
+        $akhir = InformationRequest::max('id');
+
+        if ($request->file('attachment') !== null) {
+            $attachment = $request->file('attachment');
+            $attachment->storeAs('public/information', $attachment->hashName());
+
+            InformationRequest::create([
+                'attachment'     => $attachment->hashName(),
+                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
+                'title'     => $request->title,
+                'description'   => $request->description,
+                'location'   => $request->location,
+                'privacy'   => $request->privacy,
+                'categories_id'   => $request->categories_id,
+                'users_id'   => $request->users_id,
+                'slug' => Str::slug($request->title)
+            ]);
+        } else {
+            InformationRequest::create([
+                'attachment'     => $request->attachment,
+                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
+                'title'     => $request->title,
+                'description'   => $request->description,
+                'location'   => $request->location,
+                'privacy'   => $request->privacy,
+                'categories_id'   => $request->categories_id,
+                'users_id'   => $request->users_id,
+                'slug' => Str::slug($request->title)
+            ]);
+        }
+
+        return redirect()->route('dashboard.information.index');
     }
 
     /**
