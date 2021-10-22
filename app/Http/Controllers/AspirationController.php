@@ -175,7 +175,7 @@ class AspirationController extends Controller
      */
     public function destroy(Aspiration $aspiration)
     {
-        unlink("storage/aspiration" . $aspiration->attachment);
+        unlink("storage/aspiration/" . $aspiration->attachment);
 
         $aspiration->delete();
 

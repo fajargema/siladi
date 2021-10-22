@@ -175,7 +175,7 @@ class ComplaintController extends Controller
      */
     public function destroy(Complaint $complaint)
     {
-        unlink("storage/complaint" . $complaint->attachment);
+        unlink("storage/complaint/" . $complaint->attachment);
 
         $complaint->delete();
 
