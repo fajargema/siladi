@@ -179,4 +179,18 @@ class InformationRequestController extends Controller
 
         return redirect()->route('dashboard.information.index');
     }
+
+    public function setProses($id)
+    {
+        InformationRequest::where('id', $id)->update(array('status' => 2));
+
+        return redirect()->route('dashboard.information.index');
+    }
+
+    public function setSelesai($id)
+    {
+        InformationRequest::where('id', $id)->update(array('status' => 3));
+
+        return redirect()->route('dashboard.information.index');
+    }
 }
