@@ -136,9 +136,11 @@ class InformationRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(InformationRequest $information)
     {
-        //
+        $category = Category::all();
+
+        return view('pages.dashboard.information.edit', compact('information', 'category'));
     }
 
     /**
@@ -148,9 +150,13 @@ class InformationRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, InformationRequest $information)
     {
-        //
+        $data = $request->all();
+
+        $information->update($data);
+
+        return redirect()->route('dashboard.information.index');
     }
 
     /**
