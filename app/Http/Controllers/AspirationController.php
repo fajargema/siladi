@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AspirationRequest;
 use App\Models\Aspiration;
 use App\Models\Category;
+use App\Models\Complaint;
+use App\Models\Type;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,10 +21,10 @@ class AspirationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $category, User $user)
+    public function index(Category $category, User $user, Type $type)
     {
         if (request()->ajax()) {
-            $query = Aspiration::with('category', 'user');
+            $query = Complaint::with('category', 'user', 'type')->where('types_id', '2');
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
                     return '
@@ -88,13 +90,13 @@ class AspirationController extends Controller
     {
         $awal = 'ASP';
         $dua = 'SILADI';
-        $akhir = Aspiration::max('id');
+        $akhir = Complaint::max('id');
 
         if ($request->file('attachment') !== null) {
             $attachment = $request->file('attachment');
             $attachment->storeAs('public/aspiration', $attachment->hashName());
 
-            Aspiration::create([
+            Complaint::create([
                 'attachment'     => $attachment->hashName(),
                 'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
                 'title'     => $request->title,
@@ -106,7 +108,7 @@ class AspirationController extends Controller
                 'slug' => Str::slug($request->title)
             ]);
         } else {
-            Aspiration::create([
+            Complaint::create([
                 'attachment'     => $request->attachment,
                 'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
                 'title'     => $request->title,
@@ -128,10 +130,10 @@ class AspirationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Aspiration $aspiration, User $user)
+    public function show(Complaint $aspiration, User $user)
     {
         if (request()->ajax()) {
-            $query = Aspiration::with(['category', 'user'])->where('categories_id', $aspiration->id);
+            $query = Complaint::with(['category', 'user'])->where('categories_id', $aspiration->id);
             return DataTables::of($query)
                 ->make();
         }
@@ -144,7 +146,7 @@ class AspirationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Aspiration $aspiration)
+    public function edit(Complaint $aspiration)
     {
         $category = Category::all();
 
@@ -158,7 +160,7 @@ class AspirationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Aspiration $aspiration)
+    public function update(Request $request, Complaint $aspiration)
     {
         $data = $request->all();
 
@@ -173,7 +175,7 @@ class AspirationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Aspiration $aspiration)
+    public function destroy(Complaint $aspiration)
     {
         unlink("storage/aspiration/" . $aspiration->attachment);
 
@@ -184,14 +186,14 @@ class AspirationController extends Controller
 
     public function setProses($id)
     {
-        Aspiration::where('id', $id)->update(array('status' => 2));
+        Complaint::where('id', $id)->update(array('status' => 2));
 
         return redirect()->route('dashboard.aspiration.index');
     }
 
     public function setSelesai($id)
     {
-        Aspiration::where('id', $id)->update(array('status' => 3));
+        Complaint::where('id', $id)->update(array('status' => 3));
 
         return redirect()->route('dashboard.aspiration.index');
     }
