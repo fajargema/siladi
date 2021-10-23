@@ -80,6 +80,11 @@
                                 <td class=" px-6 py-4">{{ $complaint->category->name }}</td>
                             </tr>
                             <tr>
+                                <th class=" px-6 py-4 text-left">Jenis Laporan</th>
+                                <td>:</td>
+                                <td class=" px-6 py-4">{{ $complaint->type->name }}</td>
+                            </tr>
+                            <tr>
                                 <th class=" px-6 py-4 text-left">Tanggal Kejadian</th>
                                 <td>:</td>
                                 <td class=" px-6 py-4">{{ $fdate }}</td>

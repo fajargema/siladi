@@ -29,6 +29,7 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="types_id" value="{{ $complaint->types_id }}">
                     <input type="hidden" name="attachment" value="{{ $complaint->attachment }}">
 
                     <div class="flex flex-wrap -mx-3 mb-6">

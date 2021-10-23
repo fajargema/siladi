@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Complaint;
+use App\Models\Type;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,10 +18,10 @@ class ComplaintController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $category, User $user)
+    public function index(Category $category, User $user, Type $type)
     {
         if (request()->ajax()) {
-            $query = Complaint::with('category', 'user');
+            $query = Complaint::with('category', 'user', 'type')->where('types_id', 2);
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
                     return '
@@ -105,6 +106,7 @@ class ComplaintController extends Controller
                 'date'   => $request->date,
                 'location'   => $request->location,
                 'privacy'   => $request->privacy,
+                'types_id'   => $request->types_id,
                 'categories_id'   => $request->categories_id,
                 'users_id'   => $request->users_id,
                 'slug' => Str::slug($request->title)
@@ -118,6 +120,7 @@ class ComplaintController extends Controller
                 'date'   => $request->date,
                 'location'   => $request->location,
                 'privacy'   => $request->privacy,
+                'types_id'   => $request->types_id,
                 'categories_id'   => $request->categories_id,
                 'users_id'   => $request->users_id,
                 'slug' => Str::slug($request->title)
@@ -133,10 +136,10 @@ class ComplaintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Complaint $complaint, User $user)
+    public function show(Complaint $complaint, User $user, Type $type)
     {
         if (request()->ajax()) {
-            $query = Complaint::with(['category', 'user'])->where('categories_id', $complaint->id);
+            $query = Complaint::with(['category', 'user', 'type'])->where('categories_id', $complaint->id);
             return DataTables::of($query)
                 ->make();
         }
