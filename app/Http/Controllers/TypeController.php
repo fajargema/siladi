@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TypeRequest;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -47,7 +48,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.dashboard.type.create');
     }
 
     /**
@@ -56,9 +57,13 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TypeRequest $request)
     {
-        //
+        $data = $request->all();
+
+        Type::create($data);
+
+        return redirect()->route('dashboard.type.index');
     }
 
     /**
@@ -78,9 +83,9 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Type $type)
     {
-        //
+        return view('pages.dashboard.type.edit', compact('type'));
     }
 
     /**
@@ -90,9 +95,13 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TypeRequest $request, Type $type)
     {
-        //
+        $data = $request->all();
+
+        $type->update($data);
+
+        return redirect()->route('dashboard.type.index');
     }
 
     /**

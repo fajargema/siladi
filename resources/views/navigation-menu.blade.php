@@ -17,6 +17,10 @@
                         <i class='bx bxs-dashboard mr-1'></i> {{ __('Dashboard') }}
                     </x-jet-nav-link>
 
+                    <x-jet-nav-link href="{{ route('dashboard.type.index') }}" :active="request()->routeIs('dashboard.type.index')">
+                        <i class='bx bx-book-content mr-1'></i> {{ __('Jenis Laporan') }}
+                    </x-jet-nav-link>
+
                     <x-jet-nav-link href="{{ route('dashboard.category.index') }}" :active="request()->routeIs('dashboard.category.index')">
                         <i class='bx bx-book-content mr-1'></i> {{ __('Kategori') }}
                     </x-jet-nav-link>
@@ -159,6 +163,10 @@
 
             <x-jet-responsive-nav-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard')">
                 <i class='bx bxs-dashboard mr-1'></i> {{ __('Dashboard') }}
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('dashboard.type.index') }}" :active="request()->routeIs('dashboard.type.index')">
+                <i class='bx bx-book-content mr-1'></i> {{ __('Jenis Laporan') }}
             </x-jet-responsive-nav-link>
 
             <x-jet-responsive-nav-link href="{{ route('dashboard.category.index') }}" :active="request()->routeIs('dashboard.category.index')">
