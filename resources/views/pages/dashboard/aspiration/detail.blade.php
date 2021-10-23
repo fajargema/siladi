@@ -80,6 +80,11 @@
                                 <td class=" px-6 py-4">{{ $aspiration->category->name }}</td>
                             </tr>
                             <tr>
+                                <th class=" px-6 py-4 text-left">Jenis Laporan</th>
+                                <td>:</td>
+                                <td class=" px-6 py-4">{{ $aspiration->type->name }}</td>
+                            </tr>
+                            <tr>
                                 <th class=" px-6 py-4 text-left">Nama Pelapor</th>
                                 <td>:</td>
                                 <td class=" px-6 py-4">

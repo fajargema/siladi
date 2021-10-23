@@ -103,6 +103,7 @@ class AspirationController extends Controller
                 'description'   => $request->description,
                 'location'   => $request->location,
                 'privacy'   => $request->privacy,
+                'types_id'   => $request->types_id,
                 'categories_id'   => $request->categories_id,
                 'users_id'   => $request->users_id,
                 'slug' => Str::slug($request->title)
@@ -115,6 +116,7 @@ class AspirationController extends Controller
                 'description'   => $request->description,
                 'location'   => $request->location,
                 'privacy'   => $request->privacy,
+                'types_id'   => $request->types_id,
                 'categories_id'   => $request->categories_id,
                 'users_id'   => $request->users_id,
                 'slug' => Str::slug($request->title)
@@ -130,10 +132,10 @@ class AspirationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Complaint $aspiration, User $user)
+    public function show(Complaint $aspiration, User $user, Type $type)
     {
         if (request()->ajax()) {
-            $query = Complaint::with(['category', 'user'])->where('categories_id', $aspiration->id);
+            $query = Complaint::with(['category', 'user', 'type'])->where('categories_id', $aspiration->id);
             return DataTables::of($query)
                 ->make();
         }
