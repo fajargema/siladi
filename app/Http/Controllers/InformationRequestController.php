@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Complaint;
 use App\Models\InformationRequest;
+use App\Models\Type;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,10 +19,10 @@ class InformationRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Category $category, User $user, Type $type)
     {
         if (request()->ajax()) {
-            $query = InformationRequest::with('category', 'user');
+            $query = Complaint::with('category', 'user', 'type')->where('types_id', '3');
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
                     return '
@@ -86,31 +88,33 @@ class InformationRequestController extends Controller
     {
         $awal = 'INF';
         $dua = 'SILADI';
-        $akhir = InformationRequest::max('id');
+        $akhir = Complaint::max('id');
 
         if ($request->file('attachment') !== null) {
             $attachment = $request->file('attachment');
             $attachment->storeAs('public/information', $attachment->hashName());
 
-            InformationRequest::create([
+            Complaint::create([
                 'attachment'     => $attachment->hashName(),
                 'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
                 'title'     => $request->title,
                 'description'   => $request->description,
                 'location'   => $request->location,
                 'privacy'   => $request->privacy,
+                'types_id'   => $request->types_id,
                 'categories_id'   => $request->categories_id,
                 'users_id'   => $request->users_id,
                 'slug' => Str::slug($request->title)
             ]);
         } else {
-            InformationRequest::create([
+            Complaint::create([
                 'attachment'     => $request->attachment,
                 'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
                 'title'     => $request->title,
                 'description'   => $request->description,
                 'location'   => $request->location,
                 'privacy'   => $request->privacy,
+                'types_id'   => $request->types_id,
                 'categories_id'   => $request->categories_id,
                 'users_id'   => $request->users_id,
                 'slug' => Str::slug($request->title)
@@ -126,10 +130,10 @@ class InformationRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(InformationRequest $information, User $user)
+    public function show(Complaint $information, User $user, Type $type)
     {
         if (request()->ajax()) {
-            $query = InformationRequest::with(['category', 'user'])->where('categories_id', $information->id);
+            $query = Complaint::with(['category', 'user', 'type'])->where('categories_id', $information->id);
             return DataTables::of($query)
                 ->make();
         }
@@ -142,7 +146,7 @@ class InformationRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(InformationRequest $information)
+    public function edit(Complaint $information)
     {
         $category = Category::all();
 
@@ -156,7 +160,7 @@ class InformationRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, InformationRequest $information)
+    public function update(Request $request, Complaint $information)
     {
         $data = $request->all();
 
@@ -171,7 +175,7 @@ class InformationRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(InformationRequest $information)
+    public function destroy(Complaint $information)
     {
         unlink("storage/information/" . $information->attachment);
 
@@ -182,14 +186,14 @@ class InformationRequestController extends Controller
 
     public function setProses($id)
     {
-        InformationRequest::where('id', $id)->update(array('status' => 2));
+        Complaint::where('id', $id)->update(array('status' => 2));
 
         return redirect()->route('dashboard.information.index');
     }
 
     public function setSelesai($id)
     {
-        InformationRequest::where('id', $id)->update(array('status' => 3));
+        Complaint::where('id', $id)->update(array('status' => 3));
 
         return redirect()->route('dashboard.information.index');
     }

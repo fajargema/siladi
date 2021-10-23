@@ -29,6 +29,7 @@
                     @csrf
 
                     <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="types_id" value="3">
 
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
