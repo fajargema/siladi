@@ -11,8 +11,13 @@ class Complaint extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'kode', 'title', 'description', 'date', 'location', 'categories_id', 'users_id', 'attachment', 'slug', 'privacy'
+        'kode', 'title', 'description', 'date', 'location', 'types_id', 'categories_id', 'users_id', 'attachment', 'slug', 'privacy'
     ];
+
+    public function type()
+    {
+        return $this->hasOne(Type::class, 'id', 'types_id');
+    }
 
     public function category()
     {

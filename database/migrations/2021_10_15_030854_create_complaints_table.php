@@ -21,6 +21,7 @@ class CreateComplaintsTable extends Migration
             $table->longText('description');
             $table->date('date');
             $table->string('location');
+            $table->bigInteger('types_id');
             $table->bigInteger('categories_id');
             $table->bigInteger('users_id');
             $table->integer('status')->default(1);
