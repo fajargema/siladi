@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformationRequestController;
+use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,6 +16,7 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
     Route::middleware(['admin'])->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
 
+        Route::resource('type', TypeController::class);
         Route::resource('category', CategoryController::class);
         Route::resource('aspiration', AspirationController::class);
         Route::post('/proses-asp/{id}', [AspirationController::class, 'setProses'])->name('proses-asp');
