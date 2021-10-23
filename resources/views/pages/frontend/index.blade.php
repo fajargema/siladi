@@ -133,9 +133,9 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="location" class="form-label">Upload Lampiran</label>
+                            <label for="attachment" class="form-label">Upload Lampiran</label>
                             <p><i>*Boleh dikosongkan</i></p>
-                            <input type="file" class="form-control" name="location">
+                            <input type="file" class="form-control" name="attachment">
                         </div>
 
                         <div class="mb-3">
@@ -193,9 +193,9 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="location" class="form-label">Upload Lampiran</label>
+                            <label for="attachment" class="form-label">Upload Lampiran</label>
                             <p><i>*Boleh dikosongkan</i></p>
-                            <input type="file" class="form-control" name="location">
+                            <input type="file" class="form-control" name="attachment">
                         </div>
 
                         <div class="mb-3">
@@ -222,10 +222,10 @@
                     <div class="card-body">
                       <h3 class="title card-title text-center">Sampaikan Laporan Anda</h3>
                       <hr>
-                      <form action="{{ route('simpanAsp') }}" method="POST" enctype="multipart/form-data">
+                      <form action="{{ route('simpanInf') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="users_id" value="{{ Auth::check() ? Auth::user()->id : 0  }}">
-                        <input type="hidden" name="types_id" value="{{ 2 }}">
+                        <input type="hidden" name="types_id" value="{{ 3 }}">
 
                         <div class="mb-3">
                           <label for="title" class="form-label">Judul Laporan</label>
@@ -253,9 +253,9 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="location" class="form-label">Upload Lampiran</label>
+                            <label for="attachment" class="form-label">Upload Lampiran</label>
                             <p><i>*Boleh dikosongkan</i></p>
-                            <input type="file" class="form-control" name="location">
+                            <input type="file" class="form-control" name="attachment">
                         </div>
 
                         <div class="mb-3">

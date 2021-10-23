@@ -16,6 +16,7 @@ Route::get('/hubungi-kami', [FrontendController::class, 'contact'])->name('conta
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/simpan-pen', [FrontendController::class, 'simpanPen'])->name('simpanPen');
     Route::post('/simpan-asp', [FrontendController::class, 'simpanAsp'])->name('simpanAsp');
+    Route::post('/simpan-inf', [FrontendController::class, 'simpanInf'])->name('simpanInf');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function () {

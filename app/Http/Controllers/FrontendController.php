@@ -106,4 +106,44 @@ class FrontendController extends Controller
 
         return redirect()->route('index');
     }
+
+    public function simpanInf(Request $request)
+    {
+        $awal = 'INF';
+        $dua = 'SILADI';
+        $akhir = Complaint::max('id');
+
+        if ($request->file('attachment') !== null) {
+            $attachment = $request->file('attachment');
+            $attachment->storeAs('public/information', $attachment->hashName());
+
+            Complaint::create([
+                'attachment'     => $attachment->hashName(),
+                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
+                'title'     => $request->title,
+                'description'   => $request->description,
+                'location'   => $request->location,
+                'privacy'   => $request->privacy,
+                'types_id'   => $request->types_id,
+                'categories_id'   => $request->categories_id,
+                'users_id'   => $request->users_id,
+                'slug' => Str::slug($request->title)
+            ]);
+        } else {
+            Complaint::create([
+                'attachment'     => $request->attachment,
+                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
+                'title'     => $request->title,
+                'description'   => $request->description,
+                'location'   => $request->location,
+                'privacy'   => $request->privacy,
+                'types_id'   => $request->types_id,
+                'categories_id'   => $request->categories_id,
+                'users_id'   => $request->users_id,
+                'slug' => Str::slug($request->title)
+            ]);
+        }
+
+        return redirect()->route('index');
+    }
 }
