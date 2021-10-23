@@ -13,6 +13,10 @@ Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/tentang', [FrontendController::class, 'about'])->name('about');
 Route::get('/hubungi-kami', [FrontendController::class, 'contact'])->name('contact');
 
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::post('/simpan-pen', [FrontendController::class, 'simpanPen'])->name('simpanPen');
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
