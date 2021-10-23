@@ -146,7 +146,6 @@
                             <button type="submit" class="btn btn-danger float-end">Lapor!</button>
                         </div>
 
-
                       </form>
                     </div>
 
@@ -163,18 +162,50 @@
                     <div class="card-body">
                       <h3 class="title card-title text-center">Sampaikan Laporan Anda</h3>
                       <hr>
-                      <form>
+                      <form action="{{ route('simpanAsp') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="users_id" value="{{ Auth::check() ? Auth::user()->id : 0  }}">
+                        <input type="hidden" name="types_id" value="{{ 2 }}">
+
                         <div class="mb-3">
                           <label for="title" class="form-label">Judul Laporan</label>
-                          <input type="text" class="form-control" name="title" id="title">
+                          <input type="text" class="form-control" name="title" placeholder="Ketik Judul Laporan Anda">
                         </div>
+
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Isi Laporan</label>
+                            <textarea class="form-control" name="description" cols="10" rows="10" placeholder="Ketik Isi Laporan Anda"></textarea>
+                          </div>
 
                         <div class="mb-3">
                           <label for="location" class="form-label">Asal Pelapor</label>
-                          <input type="text" class="form-control" name="location" id="location">
+                          <input type="text" class="form-control" name="location" placeholder="Ketik Asal Pelapor">
                         </div>
 
-                        <button type="submit" class="btn btn-danger float-end">Lapor!</button>
+                        <div class="mb-3">
+                            <label for="categories_id" class="form-label">Kategori Laporan</label>
+                            <select name="categories_id" class="form-control">
+                                <option>-----Pilih Kategori Pengaduan Anda-----</option>
+                                @foreach ($category as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="location" class="form-label">Upload Lampiran</label>
+                            <p><i>*Boleh dikosongkan</i></p>
+                            <input type="file" class="form-control" name="location">
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="hidden" name="privacy" value="1">
+                            <input type="radio" value="2" name="privacy"> Anonim
+                            <input type="radio" value="3" name="privacy"> Rahasia
+
+                            <button type="submit" class="btn btn-danger float-end">Lapor!</button>
+                        </div>
+
                       </form>
                     </div>
 
@@ -191,18 +222,50 @@
                     <div class="card-body">
                       <h3 class="title card-title text-center">Sampaikan Laporan Anda</h3>
                       <hr>
-                      <form>
+                      <form action="{{ route('simpanAsp') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="users_id" value="{{ Auth::check() ? Auth::user()->id : 0  }}">
+                        <input type="hidden" name="types_id" value="{{ 2 }}">
+
                         <div class="mb-3">
                           <label for="title" class="form-label">Judul Laporan</label>
-                          <input type="text" class="form-control" name="title" id="title">
+                          <input type="text" class="form-control" name="title" placeholder="Ketik Judul Laporan Anda">
                         </div>
+
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Isi Laporan</label>
+                            <textarea class="form-control" name="description" cols="10" rows="10" placeholder="Ketik Isi Laporan Anda"></textarea>
+                          </div>
 
                         <div class="mb-3">
                           <label for="location" class="form-label">Asal Pelapor</label>
-                          <input type="text" class="form-control" name="location" id="location">
+                          <input type="text" class="form-control" name="location" placeholder="Ketik Asal Pelapor">
                         </div>
 
-                        <button type="submit" class="btn btn-danger float-end">Lapor!</button>
+                        <div class="mb-3">
+                            <label for="categories_id" class="form-label">Kategori Laporan</label>
+                            <select name="categories_id" class="form-control">
+                                <option>-----Pilih Kategori Pengaduan Anda-----</option>
+                                @foreach ($category as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="location" class="form-label">Upload Lampiran</label>
+                            <p><i>*Boleh dikosongkan</i></p>
+                            <input type="file" class="form-control" name="location">
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="hidden" name="privacy" value="1">
+                            <input type="radio" value="2" name="privacy"> Anonim
+                            <input type="radio" value="3" name="privacy"> Rahasia
+
+                            <button type="submit" class="btn btn-danger float-end">Lapor!</button>
+                        </div>
+
                       </form>
                     </div>
 
