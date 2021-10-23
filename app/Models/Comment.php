@@ -13,17 +13,7 @@ class Comment extends Model
         'reports_id', 'users_id', 'body'
     ];
 
-    public function aspiration()
-    {
-        return $this->hasOne(Aspiration::class, 'id', 'reports_id');
-    }
-
     public function complaint()
-    {
-        return $this->hasOne(Aspiration::class, 'id', 'reports_id');
-    }
-
-    public function informationrequest()
     {
         return $this->hasOne(Aspiration::class, 'id', 'reports_id');
     }
