@@ -21,7 +21,7 @@ class ComplaintController extends Controller
     public function index(Category $category, User $user, Type $type)
     {
         if (request()->ajax()) {
-            $query = Complaint::with('category', 'user', 'type')->where('types_id', 2);
+            $query = Complaint::with('category', 'user', 'type')->where('types_id', 1);
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
                     return '
