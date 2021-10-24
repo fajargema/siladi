@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Complaint;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -16,9 +17,16 @@ class FrontendController extends Controller
         return view('pages.frontend.index', compact('category'));
     }
 
-    public function report()
+    public function report(Complaint $complaint)
     {
-        return view('pages.frontend.report');
+        $categories = Category::get();
+        $reports = Complaint::with(['type', 'category', 'user'])->latest()->simplePaginate(10);
+
+        $date = Carbon::parse($complaint->created_at)->locale('id');
+        $date->settings(['formatFunction' => 'translatedFormat']);
+        $fdate = $date->format('l, j F Y');
+
+        return view('pages.frontend.report', compact('reports', 'categories', 'fdate'));
     }
 
     public function about()
