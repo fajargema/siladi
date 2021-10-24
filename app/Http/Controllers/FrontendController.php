@@ -16,6 +16,11 @@ class FrontendController extends Controller
         return view('pages.frontend.index', compact('category'));
     }
 
+    public function report()
+    {
+        return view('pages.frontend.report');
+    }
+
     public function about()
     {
         return view('pages.frontend.about');

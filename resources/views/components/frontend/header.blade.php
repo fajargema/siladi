@@ -9,8 +9,8 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                 <li><a class="nav-link {{ request()->routeIs('index') ? 'active' : '' }}" href="{{ route('index') }}">Home</a></li>
+                <li><a class="nav-link {{ request()->routeIs('report') ? 'active' : '' }}" href="{{ route('report') }}">Laporan</a></li>
                 <li><a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">Tentang SILADI!</a></li>
-                <li><a class="nav-link" href="blog.html">Laporan</a></li>
                 <li><a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Hubungi Kami</a></li>
                 <li class="dropdown"><a href="#"> <i class="bx bx-user"></i><span>{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>

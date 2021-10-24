@@ -10,6 +10,7 @@ use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
+Route::get('/laporan', [FrontendController::class, 'report'])->name('report');
 Route::get('/tentang', [FrontendController::class, 'about'])->name('about');
 Route::get('/hubungi-kami', [FrontendController::class, 'contact'])->name('contact');
 
