@@ -10,11 +10,12 @@ use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
-Route::get('/laporan', [FrontendController::class, 'report'])->name('report');
 Route::get('/tentang', [FrontendController::class, 'about'])->name('about');
 Route::get('/hubungi-kami', [FrontendController::class, 'contact'])->name('contact');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/laporan', [FrontendController::class, 'report'])->name('report');
+    Route::get('/laporan/{slug}', [FrontendController::class, 'details'])->name('details');
     Route::post('/simpan-pen', [FrontendController::class, 'simpanPen'])->name('simpanPen');
     Route::post('/simpan-asp', [FrontendController::class, 'simpanAsp'])->name('simpanAsp');
     Route::post('/simpan-inf', [FrontendController::class, 'simpanInf'])->name('simpanInf');

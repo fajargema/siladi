@@ -17,19 +17,19 @@
                 </div> -->
 
                 <h2 class="entry-title">
-                  <a href="blog-single.html">{{ $item->title }}</a>
+                  <a href="{{ route('details', $item->slug) }}">{{ $item->title }}</a>
                 </h2>
 
                 <div class="entry-meta">
                   <ul>
                     <li class="d-flex align-items-center"><i class="bi bi-person"></i>
-                        <a href="blog-single.html">
+                        <a href="{{ route('details', $item->slug) }}">
                             {{ $item->user->name }}
                         </a>
                     </li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
                           datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12
+                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{{ route('details', $item->slug) }}">12
                         Comments</a></li>
                   </ul>
                 </div>
@@ -39,7 +39,7 @@
                     {{ $item->description }}
                   </p>
                   <div class="read-more">
-                    <a href="blog-single.html">Read More</a>
+                    <a href="{{ route('details', $item->slug) }}">Read More</a>
                   </div>
                 </div>
 
@@ -82,7 +82,7 @@
 
                   @foreach ($reports as $item)
                   <div class="post-item">
-                    <h4><a href="blog-single.html">{{ $item->title }}</a></h4>
+                    <h4><a href="{{ route('details', $item->slug) }}">{{ $item->title }}</a></h4>
                     <time datetime="{{ $fdate }}">{{ $fdate }}</time>
                   </div>
                   @endforeach

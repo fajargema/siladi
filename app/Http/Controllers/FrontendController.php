@@ -29,6 +29,19 @@ class FrontendController extends Controller
         return view('pages.frontend.report', compact('reports', 'categories', 'fdate'));
     }
 
+    public function details(Complaint $complaint, $slug)
+    {
+        $categories = Category::get();
+        $reports = Complaint::get();
+        $report = Complaint::with(['type', 'category', 'user'])->where('slug', $slug)->firstOrFail();
+
+        $date = Carbon::parse($complaint->created_at)->locale('id');
+        $date->settings(['formatFunction' => 'translatedFormat']);
+        $fdate = $date->format('l, j F Y');
+
+        return view('pages.frontend.details', compact('reports', 'report', 'categories', 'fdate'));
+    }
+
     public function about()
     {
         return view('pages.frontend.about');
