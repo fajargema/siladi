@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Complaint;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -171,5 +172,14 @@ class FrontendController extends Controller
         }
 
         return redirect()->route('index');
+    }
+
+    public function comment(Request $request)
+    {
+        $data = $request->all();
+
+        Comment::create($data);
+
+        return redirect()->back();
     }
 }

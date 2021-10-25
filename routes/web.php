@@ -19,6 +19,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/simpan-pen', [FrontendController::class, 'simpanPen'])->name('simpanPen');
     Route::post('/simpan-asp', [FrontendController::class, 'simpanAsp'])->name('simpanAsp');
     Route::post('/simpan-inf', [FrontendController::class, 'simpanInf'])->name('simpanInf');
+    Route::post('/comment', [FrontendController::class, 'comment'])->name('comment');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function () {

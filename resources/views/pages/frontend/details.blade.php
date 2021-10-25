@@ -52,10 +52,13 @@
 
                 <div class="reply-form">
                   <h4>Leave a Reply</h4>
-                  <form action="">
+                  <form action="{{ route('comment') }}" method="POST">
+                    @csrf
                     <div class="row">
+                        <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
+                        <input type="hidden" name="reports_id" value="{{ $report->id }}">
                       <div class="col form-group">
-                        <textarea name="comment" class="form-control" placeholder="Your Comment*"></textarea>
+                        <textarea name="body" class="form-control" placeholder="Ketik komen Anda"></textarea>
                       </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Post Comment</button>

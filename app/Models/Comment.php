@@ -15,7 +15,7 @@ class Comment extends Model
 
     public function complaint()
     {
-        return $this->hasOne(Aspiration::class, 'id', 'reports_id');
+        return $this->hasOne(Complaint::class, 'id', 'reports_id');
     }
 
     public function user()
