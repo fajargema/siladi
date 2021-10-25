@@ -29,8 +29,11 @@
                     </li>
                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
                           datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{{ route('details', $item->slug) }}">12
-                        Comments</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
+                        <a href="{{ route('details', $item->slug) }}">
+                            2 Comments
+                        </a>
+                    </li>
                   </ul>
                 </div>
 

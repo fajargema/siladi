@@ -19,7 +19,7 @@
                   <ul>
                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">{{ $report->user->name }}</a></li>
                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">{{ $total }} Comments</a></li>
                   </ul>
                 </div>
 
@@ -34,21 +34,22 @@
 
               <div class="blog-comments">
 
-                <h4 class="comments-count">8 Comments</h4>
+                <h4 class="comments-count">{{ $total }} Comments</h4>
 
+                @foreach ($comment as $com)
                 <div id="comment-1" class="comment">
-                  <div class="d-flex">
-                    <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
-                    <div>
-                      <h5><a href="">Georgia Reader</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                      <time datetime="2020-01-01">01 Jan, 2020</time>
-                      <p>
-                        Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut sapiente quis molestiae est qui cum soluta.
-                        Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.
-                      </p>
+                    <div class="d-flex">
+                      <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
+                      <div>
+                        <h5><a href="">{{ $com->user->name }}</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                        <time datetime="{{ $com->created_at }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $com->created_at }}">{{ Carbon\Carbon::parse($com->created_at)->diffForHumans() }}</time>
+                        <p>
+                          {{ $com->body }}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div><!-- End comment #1 -->
+                @endforeach
 
                 <div class="reply-form">
                   <h4>Leave a Reply</h4>
