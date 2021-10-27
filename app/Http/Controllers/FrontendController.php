@@ -189,4 +189,16 @@ class FrontendController extends Controller
 
         return redirect()->back();
     }
+
+    public function myReport(Complaint $complaint, $users_id)
+    {
+        $categories = Category::get();
+        $report = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->simplePaginate(10);
+
+        $date = Carbon::parse($complaint->created_at)->locale('id');
+        $date->settings(['formatFunction' => 'translatedFormat']);
+        $fdate = $date->format('l, j F Y');
+
+        return view('pages.frontend.me.index', compact('report', 'categories', 'fdate'));
+    }
 }

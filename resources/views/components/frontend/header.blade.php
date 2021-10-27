@@ -15,7 +15,7 @@
                 <li class="dropdown"><a href="#"> <i class="bx bx-user"></i><span>{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                     <li><a href="#">Profile</a></li>
-                    <li><a href="#">Laporan Saya</a></li>
+                    <li><a href="{{ route('myReport', Auth::user()->id) }}">Laporan Saya</a></li>
                     <hr>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">

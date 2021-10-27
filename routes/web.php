@@ -20,6 +20,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/simpan-asp', [FrontendController::class, 'simpanAsp'])->name('simpanAsp');
     Route::post('/simpan-inf', [FrontendController::class, 'simpanInf'])->name('simpanInf');
     Route::post('/comment', [FrontendController::class, 'comment'])->name('comment');
+
+    Route::get('/laporan-saya/{users_id}', [FrontendController::class, 'myReport'])->name('myReport');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function () {
