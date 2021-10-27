@@ -204,4 +204,17 @@ class FrontendController extends Controller
 
         return view('pages.frontend.me.index', compact('report', 'categories', 'wait', 'process', 'done', 'fdate'));
     }
+
+    public function search(Request $request, Complaint $complaint)
+    {
+        $keyword = $request->search;
+        $complaints = Complaint::with(['type', 'category', 'user'])->where('kode', 'like', "%" . $keyword . "%")->where('title', 'like', "%" . $keyword . "%")->where('privacy', '!=', 3)->paginate(10);
+        $categories = Category::get();
+
+        $date = Carbon::parse($complaint->created_at)->locale('id');
+        $date->settings(['formatFunction' => 'translatedFormat']);
+        $fdate = $date->format('l, j F Y');
+
+        return view('pages.frontend.search', compact('complaints', 'categories', 'fdate'));
+    }
 }

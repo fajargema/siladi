@@ -9,7 +9,7 @@
 
             <div class="col-lg-8 entries">
 
-              @foreach ($reports as $item)
+              @foreach ($complaints as $item)
               <article class="entry">
 
                 <!-- <div class="entry-img">
@@ -55,7 +55,7 @@
 
               <div class="blog-pagination">
                 <ul class="justify-content-center">
-                    {{ $reports->onEachSide(5)->links() }}
+                    {{ $complaints->onEachSide(5)->links() }}
                 </ul>
               </div>
 
@@ -87,7 +87,7 @@
                 <h3 class="sidebar-title">Recent Posts</h3>
                 <div class="sidebar-item recent-posts">
 
-                  @foreach ($reports as $item)
+                  @foreach ($complaints as $item)
                   <div class="post-item">
                     <h4><a href="{{ route('details', $item->slug) }}">{{ $item->title }}</a></h4>
                     <time datetime="{{ $fdate }}">{{ $fdate }}</time>
