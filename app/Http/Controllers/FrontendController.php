@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Complaint;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,12 @@ class FrontendController extends Controller
 {
     public function index()
     {
+        $total_report = Complaint::all()->count();
+        $total_comment = Comment::all()->count();
+        $total_cat = Category::all()->count();
+        $total_user = User::all()->count();
         $category = Category::all();
-        return view('pages.frontend.index', compact('category'));
+        return view('pages.frontend.index', compact('category', 'total_report', 'total_comment', 'total_cat', 'total_user'));
     }
 
     public function report(Complaint $complaint)
