@@ -1,63 +1,259 @@
 @extends('layouts.frontend')
 
 @section('content')
+
     <!-- ======= Blog Section ======= -->
-    <section id="blog" class="blog mt-5">
+    <section id="blog" class="blog">
+
         <div class="container" data-aos="fade-up">
 
           <div class="row">
 
             <div class="col-lg-8 entries">
+                <!-- ======= Lapor Section ======= -->
+                <section id="tabs" class="tabs">
+                    <div class="container" data-aos="fade-up">
 
-              @foreach ($report as $item)
-              <article class="entry">
-
-                <!-- <div class="entry-img">
-                  <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
-                </div> -->
-
-                <h2 class="entry-title">
-                  <a href="{{ route('details', $item->slug) }}">{{ $item->title }}</a>
-                </h2>
-
-                <div class="entry-meta">
-                  <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i>
-                        <a href="{{ route('details', $item->slug) }}">
-                            {{ $item->user->name }}
+                    <ul class="nav nav-tabs row d-flex">
+                        <li class="nav-item col-3">
+                        <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
+                            <h4 class="d-none d-lg-block">Semua</h4>
                         </a>
-                    </li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
-                          datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
-                        <a href="{{ route('details', $item->slug) }}">
-                            2 Comments
+                        </li>
+                        <li class="nav-item col-3">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
+                            <h4 class="d-none d-lg-block">Belum</h4>
                         </a>
-                    </li>
-                  </ul>
-                </div>
+                        </li>
+                        <li class="nav-item col-3">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
+                            <h4 class="d-none d-lg-block">Proses</h4>
+                        </a>
+                        </li>
+                        <li class="nav-item col-3">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
+                            <h4 class="d-none d-lg-block">Selesai</h4>
+                        </a>
+                        </li>
+                    </ul>
 
-                <div class="entry-content">
-                  <p>
-                    {{ $item->description }}
-                  </p>
-                  <div class="read-more">
-                    <a href="{{ route('details', $item->slug) }}">Read More</a>
-                  </div>
-                </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active show" id="tab-1">
+                        <div class="row">
+                            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                                @foreach ($report as $item)
+                                <article class="entry">
 
-              </article>
-              @endforeach
+                                <!-- <div class="entry-img">
+                                    <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+                                </div> -->
 
-              <div class="blog-pagination">
-                <ul class="justify-content-center">
-                    {{ $report->onEachSide(5)->links() }}
-                </ul>
-              </div>
+                                <h2 class="entry-title">
+                                    <a href="{{ route('details', $item->slug) }}">{{ $item->title }}</a>
+                                </h2>
+
+                                <div class="entry-meta">
+                                    <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i>
+                                        <a href="{{ route('details', $item->slug) }}">
+                                            {{ $item->user->name }}
+                                        </a>
+                                    </li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
+                                            datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
+                                        <a href="{{ route('details', $item->slug) }}">
+                                            2 Comments
+                                        </a>
+                                    </li>
+                                    </ul>
+                                </div>
+
+                                <div class="entry-content">
+                                    <p>
+                                    {{ $item->description }}
+                                    </p>
+                                    <div class="read-more">
+                                    <a href="{{ route('details', $item->slug) }}">Read More</a>
+                                    </div>
+                                </div>
+
+                                </article>
+                                @endforeach
+
+                                <div class="blog-pagination">
+                                <ul class="justify-content-center">
+                                    {{ $report->onEachSide(5)->links() }}
+                                </ul>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="tab-pane" id="tab-2">
+                        <div class="row">
+                            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                                @foreach ($wait as $item)
+                                <article class="entry">
+
+                                <!-- <div class="entry-img">
+                                    <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+                                </div> -->
+
+                                <h2 class="entry-title">
+                                    <a href="{{ route('details', $item->slug) }}">{{ $item->title }}</a>
+                                </h2>
+
+                                <div class="entry-meta">
+                                    <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i>
+                                        <a href="{{ route('details', $item->slug) }}">
+                                            {{ $item->user->name }}
+                                        </a>
+                                    </li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
+                                            datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
+                                        <a href="{{ route('details', $item->slug) }}">
+                                            2 Comments
+                                        </a>
+                                    </li>
+                                    </ul>
+                                </div>
+
+                                <div class="entry-content">
+                                    <p>
+                                    {{ $item->description }}
+                                    </p>
+                                    <div class="read-more">
+                                    <a href="{{ route('details', $item->slug) }}">Read More</a>
+                                    </div>
+                                </div>
+
+                                </article>
+                                @endforeach
+
+                                <div class="blog-pagination">
+                                <ul class="justify-content-center">
+                                    {{ $report->onEachSide(5)->links() }}
+                                </ul>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="tab-pane" id="tab-3">
+                            <div class="row">
+                                <div class="container" data-aos="fade-up" data-aos-delay="100">
+                                    @foreach ($process as $item)
+                                    <article class="entry">
+
+                                    <!-- <div class="entry-img">
+                                        <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+                                    </div> -->
+
+                                    <h2 class="entry-title">
+                                        <a href="{{ route('details', $item->slug) }}">{{ $item->title }}</a>
+                                    </h2>
+
+                                    <div class="entry-meta">
+                                        <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>
+                                            <a href="{{ route('details', $item->slug) }}">
+                                                {{ $item->user->name }}
+                                            </a>
+                                        </li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
+                                                datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
+                                            <a href="{{ route('details', $item->slug) }}">
+                                                2 Comments
+                                            </a>
+                                        </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="entry-content">
+                                        <p>
+                                        {{ $item->description }}
+                                        </p>
+                                        <div class="read-more">
+                                        <a href="{{ route('details', $item->slug) }}">Read More</a>
+                                        </div>
+                                    </div>
+
+                                    </article>
+                                    @endforeach
+
+                                    <div class="blog-pagination">
+                                    <ul class="justify-content-center">
+                                        {{ $report->onEachSide(5)->links() }}
+                                    </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="tab-4">
+                            <div class="row">
+                                <div class="container" data-aos="fade-up" data-aos-delay="100">
+                                    @foreach ($done as $item)
+                                    <article class="entry">
+
+                                    <!-- <div class="entry-img">
+                                        <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+                                    </div> -->
+
+                                    <h2 class="entry-title">
+                                        <a href="{{ route('details', $item->slug) }}">{{ $item->title }}</a>
+                                    </h2>
+
+                                    <div class="entry-meta">
+                                        <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>
+                                            <a href="{{ route('details', $item->slug) }}">
+                                                {{ $item->user->name }}
+                                            </a>
+                                        </li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
+                                                datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
+                                            <a href="{{ route('details', $item->slug) }}">
+                                                2 Comments
+                                            </a>
+                                        </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="entry-content">
+                                        <p>
+                                        {{ $item->description }}
+                                        </p>
+                                        <div class="read-more">
+                                        <a href="{{ route('details', $item->slug) }}">Read More</a>
+                                        </div>
+                                    </div>
+
+                                    </article>
+                                    @endforeach
+
+                                    <div class="blog-pagination">
+                                    <ul class="justify-content-center">
+                                        {{ $report->onEachSide(5)->links() }}
+                                    </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    </div>
+                </section><!-- End Lapor Section -->
 
             </div><!-- End blog entries list -->
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 mt-5">
 
               <div class="sidebar">
 

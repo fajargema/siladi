@@ -26,7 +26,7 @@ class FrontendController extends Controller
     public function report(Complaint $complaint)
     {
         $categories = Category::get();
-        $reports = Complaint::with(['type', 'category', 'user'])->latest()->simplePaginate(10);
+        $reports = Complaint::with(['type', 'category', 'user'])->where('privacy', '!=', 3)->latest()->simplePaginate(10);
 
         $date = Carbon::parse($complaint->created_at)->locale('id');
         $date->settings(['formatFunction' => 'translatedFormat']);
@@ -194,11 +194,14 @@ class FrontendController extends Controller
     {
         $categories = Category::get();
         $report = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->simplePaginate(10);
+        $wait = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->where('status', 1)->simplePaginate(10);
+        $process = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->where('status', 2)->simplePaginate(10);
+        $done = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->where('status', 3)->simplePaginate(10);
 
         $date = Carbon::parse($complaint->created_at)->locale('id');
         $date->settings(['formatFunction' => 'translatedFormat']);
         $fdate = $date->format('l, j F Y');
 
-        return view('pages.frontend.me.index', compact('report', 'categories', 'fdate'));
+        return view('pages.frontend.me.index', compact('report', 'categories', 'wait', 'process', 'done', 'fdate'));
     }
 }

@@ -24,7 +24,11 @@
                   <ul>
                     <li class="d-flex align-items-center"><i class="bi bi-person"></i>
                         <a href="{{ route('details', $item->slug) }}">
-                            {{ $item->user->name }}
+                            @if ($item->privacy == 1)
+                                {{ $item->user->name }}
+                            @elseif ($item->privacy == 2)
+                                {{ $result = substr($item->user->name, 0, 1) . preg_replace('/[^@]/', '*', substr($item->user->name, 1)) }}
+                            @endif
                         </a>
                     </li>
                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
