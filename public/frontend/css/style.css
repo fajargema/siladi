@@ -360,16 +360,6 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 82px;
 }
 
-#hero:before {
-    content: "";
-    background: rgba(0, 0, 0, 0.6);
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-}
-
 #hero h1 {
     margin: 0;
     font-size: 48px;
