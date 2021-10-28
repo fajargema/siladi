@@ -12,9 +12,10 @@
                 <li><a class="nav-link {{ request()->routeIs('report') ? 'active' : '' }}" href="{{ route('report') }}">Laporan</a></li>
                 <li><a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">Tentang SILADI!</a></li>
                 <li><a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Hubungi Kami</a></li>
-                <li class="dropdown"><a href="#"> <i class="bx bx-user"></i><span>{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="#"> <img src="{{ asset('frontend/img/male.png') }}" alt="User Image">
+                    <span>{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                    <li><a href="#">Profile</a></li>
+                    <li><a href="{{ route('profile.show') }}">Profile</a></li>
                     <li><a href="{{ route('myReport', Auth::user()->id) }}">Laporan Saya</a></li>
                     <hr>
                     <li>

@@ -35,7 +35,7 @@
                           datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
                     <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
                         <a href="{{ route('details', $item->slug) }}">
-                            2 Comments
+                            {{ $total }} Comments
                         </a>
                     </li>
                   </ul>

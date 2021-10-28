@@ -27,12 +27,13 @@ class FrontendController extends Controller
     {
         $categories = Category::get();
         $reports = Complaint::with(['type', 'category', 'user'])->where('privacy', '!=', 3)->latest()->simplePaginate(10);
+        $total = Comment::where('reports_id', $complaint->id)->count();
 
         $date = Carbon::parse($complaint->created_at)->locale('id');
         $date->settings(['formatFunction' => 'translatedFormat']);
         $fdate = $date->format('l, j F Y');
 
-        return view('pages.frontend.report', compact('reports', 'categories', 'fdate'));
+        return view('pages.frontend.report', compact('reports', 'categories', 'fdate', 'total'));
     }
 
     public function details(Complaint $complaint, $slug)

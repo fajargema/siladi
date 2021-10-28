@@ -44,10 +44,6 @@
                                 @foreach ($report as $item)
                                 <article class="entry">
 
-                                <!-- <div class="entry-img">
-                                    <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
-                                </div> -->
-
                                 <h2 class="entry-title">
                                     <a href="{{ route('details', $item->slug) }}">{{ $item->title }}</a>
                                 </h2>

@@ -39,7 +39,7 @@
                 @foreach ($comment as $com)
                 <div id="comment-1" class="comment">
                     <div class="d-flex">
-                      <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
+                      <div class="comment-img"><img src="{{ asset('frontend/img/male-100.png') }}" alt="User Image"></div>
                       <div>
                         <h5><a href="">{{ $com->user->name }}</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
                         <time datetime="{{ $com->created_at }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $com->created_at }}">{{ Carbon\Carbon::parse($com->created_at)->diffForHumans() }}</time>
