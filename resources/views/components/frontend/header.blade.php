@@ -12,6 +12,14 @@
                 <li><a class="nav-link {{ request()->routeIs('report') ? 'active' : '' }}" href="{{ route('report') }}">Laporan</a></li>
                 <li><a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">Tentang SILADI!</a></li>
                 <li><a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Hubungi Kami</a></li>
+                <li style="margin-left: 30px">
+                    <div class="search-form">
+                        <form action="{{ route('search') }}" method="GET">
+                        <input type="text" name="search" placeholder="Cari Kode pengaduan">
+                        <button type="submit"><i class="bi bi-search"></i></button>
+                        </form>
+                    </div>
+                </li>
                 <li class="dropdown"><a href="#"> <img src="{{ asset('frontend/img/male.png') }}" alt="User Image">
                     <span>{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
