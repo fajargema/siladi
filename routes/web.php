@@ -6,12 +6,14 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\InformationRequestController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/tentang', [FrontendController::class, 'about'])->name('about');
 Route::get('/hubungi-kami', [FrontendController::class, 'contact'])->name('contact');
+Route::post('/kirim', [FrontendController::class, 'kirim'])->name('kirim');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/laporan', [FrontendController::class, 'report'])->name('report');

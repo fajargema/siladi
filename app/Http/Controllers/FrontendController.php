@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class FrontendController extends Controller
 {
@@ -217,5 +219,50 @@ class FrontendController extends Controller
         $fdate = $date->format('l, j F Y');
 
         return view('pages.frontend.search', compact('complaints', 'categories', 'fdate'));
+    }
+
+    public function kirim(Request $request)
+    {
+        $subject = $request->input('subject');
+        $name = $request->input('name');
+        $emailAddress = $request->input('email');
+        $message = $request->input('message');
+
+        $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+        try {
+            // Pengaturan Server
+            // $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+            $mail->isSMTP();                                      // Set mailer to use SMTP
+            $mail->Host = 'smtp.gmail.com';                  // Specify main and backup SMTP servers
+            $mail->SMTPAuth = true;                               // Enable SMTP authentication
+            $mail->Username = 'fgemar72@gmail.com';                 // SMTP username
+            $mail->Password = 'hdwipxpoblpfhldu';                           // SMTP password
+            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+            $mail->Port = 587;                                    // TCP port to connect to
+
+            // Siapa yang mengirim email
+            $mail->setFrom("fgemar72@gmail.com", "Fajar Gema Ramadhan");
+
+            // Siapa yang akan menerima email
+            $mail->addAddress('gemaramaje@gmail.com', 'SILADI');     // Add a recipient
+            // $mail->addAddress('ellen@example.com');               // Name is optional
+
+            // ke siapa akan kita balas emailnya
+            $mail->addReplyTo($emailAddress, $name);
+
+            //Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = $subject;
+            $mail->Body    = $message;
+            $mail->AltBody = $message;
+
+            $mail->send();
+
+            $request->session()->flash('status', 'Terima kasih, kami sudah menerima email anda.');
+            return view('pages.frontend.contact');
+        } catch (Exception $e) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        }
     }
 }
