@@ -4,6 +4,7 @@ use App\Http\Controllers\AspirationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FEReportController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\InformationRequestController;
 use App\Http\Controllers\MailController;
@@ -18,16 +19,16 @@ Route::post('/kirim', [FrontendController::class, 'kirim'])->name('kirim');
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/laporan', [FrontendController::class, 'report'])->name('report');
     Route::get('/laporan/{slug}', [FrontendController::class, 'details'])->name('details');
-    Route::post('/simpan-pen', [FrontendController::class, 'simpanPen'])->name('simpanPen');
-    Route::post('/simpan-asp', [FrontendController::class, 'simpanAsp'])->name('simpanAsp');
-    Route::post('/simpan-inf', [FrontendController::class, 'simpanInf'])->name('simpanInf');
-    Route::post('/comment', [FrontendController::class, 'comment'])->name('comment');
-
     Route::get('/kategori/{id}', [FrontendController::class, 'category'])->name('category');
 
-    Route::get('/search', [FrontendController::class, 'search'])->name('search');
+    Route::post('/simpan-pen', [FEReportController::class, 'simpanPen'])->name('simpanPen');
+    Route::post('/simpan-asp', [FEReportController::class, 'simpanAsp'])->name('simpanAsp');
+    Route::post('/simpan-inf', [FEReportController::class, 'simpanInf'])->name('simpanInf');
+    Route::post('/comment', [FEReportController::class, 'comment'])->name('comment');
 
-    Route::get('/laporan-saya/{users_id}', [FrontendController::class, 'myReport'])->name('myReport');
+    Route::get('/search', [FEReportController::class, 'search'])->name('search');
+
+    Route::get('/laporan-saya/{users_id}', [FEReportController::class, 'myReport'])->name('myReport');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function () {

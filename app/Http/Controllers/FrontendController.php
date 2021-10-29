@@ -76,164 +76,6 @@ class FrontendController extends Controller
         return view('pages.frontend.contact');
     }
 
-    public function simpanPen(Request $request)
-    {
-        $awal = 'PEN';
-        $dua = 'SILADI';
-        $akhir = Complaint::max('id');
-
-        if ($request->file('attachment') !== null) {
-            $attachment = $request->file('attachment');
-            $attachment->storeAs('public/complaint', $attachment->hashName());
-
-            Complaint::create([
-                'attachment'     => $attachment->hashName(),
-                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
-                'title'     => $request->title,
-                'description'   => $request->description,
-                'date'   => $request->date,
-                'location'   => $request->location,
-                'privacy'   => $request->privacy,
-                'types_id'   => $request->types_id,
-                'categories_id'   => $request->categories_id,
-                'users_id'   => $request->users_id,
-                'slug' => Str::slug($request->title)
-            ]);
-        } else {
-            Complaint::create([
-                'attachment'     => $request->attachment,
-                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
-                'title'     => $request->title,
-                'description'   => $request->description,
-                'date'   => $request->date,
-                'location'   => $request->location,
-                'privacy'   => $request->privacy,
-                'types_id'   => $request->types_id,
-                'categories_id'   => $request->categories_id,
-                'users_id'   => $request->users_id,
-                'slug' => Str::slug($request->title)
-            ]);
-        }
-        return redirect()->route('index');
-    }
-
-    public function simpanAsp(Request $request)
-    {
-        $awal = 'ASP';
-        $dua = 'SILADI';
-        $akhir = Complaint::max('id');
-
-        if ($request->file('attachment') !== null) {
-            $attachment = $request->file('attachment');
-            $attachment->storeAs('public/aspiration', $attachment->hashName());
-
-            Complaint::create([
-                'attachment'     => $attachment->hashName(),
-                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
-                'title'     => $request->title,
-                'description'   => $request->description,
-                'location'   => $request->location,
-                'privacy'   => $request->privacy,
-                'types_id'   => $request->types_id,
-                'categories_id'   => $request->categories_id,
-                'users_id'   => $request->users_id,
-                'slug' => Str::slug($request->title)
-            ]);
-        } else {
-            Complaint::create([
-                'attachment'     => $request->attachment,
-                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
-                'title'     => $request->title,
-                'description'   => $request->description,
-                'location'   => $request->location,
-                'privacy'   => $request->privacy,
-                'types_id'   => $request->types_id,
-                'categories_id'   => $request->categories_id,
-                'users_id'   => $request->users_id,
-                'slug' => Str::slug($request->title)
-            ]);
-        }
-
-        return redirect()->route('index');
-    }
-
-    public function simpanInf(Request $request)
-    {
-        $awal = 'INF';
-        $dua = 'SILADI';
-        $akhir = Complaint::max('id');
-
-        if ($request->file('attachment') !== null) {
-            $attachment = $request->file('attachment');
-            $attachment->storeAs('public/information', $attachment->hashName());
-
-            Complaint::create([
-                'attachment'     => $attachment->hashName(),
-                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
-                'title'     => $request->title,
-                'description'   => $request->description,
-                'location'   => $request->location,
-                'privacy'   => $request->privacy,
-                'types_id'   => $request->types_id,
-                'categories_id'   => $request->categories_id,
-                'users_id'   => $request->users_id,
-                'slug' => Str::slug($request->title)
-            ]);
-        } else {
-            Complaint::create([
-                'attachment'     => $request->attachment,
-                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
-                'title'     => $request->title,
-                'description'   => $request->description,
-                'location'   => $request->location,
-                'privacy'   => $request->privacy,
-                'types_id'   => $request->types_id,
-                'categories_id'   => $request->categories_id,
-                'users_id'   => $request->users_id,
-                'slug' => Str::slug($request->title)
-            ]);
-        }
-
-        return redirect()->route('index');
-    }
-
-    public function comment(Request $request)
-    {
-        $data = $request->all();
-
-        Comment::create($data);
-
-        return redirect()->back();
-    }
-
-    public function myReport(Complaint $complaint, $users_id)
-    {
-        $categories = Category::get();
-        $report = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->simplePaginate(10);
-        $wait = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->where('status', 1)->simplePaginate(10);
-        $process = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->where('status', 2)->simplePaginate(10);
-        $done = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->where('status', 3)->simplePaginate(10);
-
-        $date = Carbon::parse($complaint->created_at)->locale('id');
-        $date->settings(['formatFunction' => 'translatedFormat']);
-        $fdate = $date->format('l, j F Y');
-
-        return view('pages.frontend.me.index', compact('report', 'categories', 'wait', 'process', 'done', 'fdate'));
-    }
-
-    public function search(Request $request, Complaint $complaint)
-    {
-        $keyword = $request->search;
-        $complaints = Complaint::with(['type', 'category', 'user'])->where('kode', 'like', "%" . $keyword . "%")->where('title', 'like', "%" . $keyword . "%")->where('privacy', '!=', 3)->paginate(10);
-        $categories = Category::get();
-
-        $date = Carbon::parse($complaint->created_at)->locale('id');
-        $date->settings(['formatFunction' => 'translatedFormat']);
-        $fdate = $date->format('l, j F Y');
-
-        return view('pages.frontend.search', compact('complaints', 'categories', 'fdate'));
-    }
-
     public function kirim(Request $request)
     {
         $subject = $request->input('subject');
@@ -241,30 +83,25 @@ class FrontendController extends Controller
         $emailAddress = $request->input('email');
         $message = $request->input('message');
 
-        $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+        $mail = new PHPMailer(true);
         try {
             // Pengaturan Server
-            // $mail->SMTPDebug = 2;                                 // Enable verbose debug output
-            $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = 'smtp.gmail.com';                  // Specify main and backup SMTP servers
-            $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = 'fgemar72@gmail.com';                 // SMTP username
-            $mail->Password = 'hdwipxpoblpfhldu';                           // SMTP password
-            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-            $mail->Port = 587;                                    // TCP port to connect to
+            // $mail->SMTPDebug = 2;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'fgemar72@gmail.com';
+            $mail->Password = 'hdwipxpoblpfhldu';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
 
-            // Siapa yang mengirim email
             $mail->setFrom("fgemar72@gmail.com", "Fajar Gema Ramadhan");
 
-            // Siapa yang akan menerima email
-            $mail->addAddress('gemaramaje@gmail.com', 'SILADI');     // Add a recipient
-            // $mail->addAddress('ellen@example.com');               // Name is optional
+            $mail->addAddress('gemaramaje@gmail.com', 'SILADI');
 
-            // ke siapa akan kita balas emailnya
             $mail->addReplyTo($emailAddress, $name);
 
-            //Content
-            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->isHTML(true);
             $mail->Subject = $subject;
             $mail->Body    = $message;
             $mail->AltBody = $message;
