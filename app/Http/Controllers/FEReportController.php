@@ -162,13 +162,14 @@ class FEReportController extends Controller
     {
         $keyword = $request->search;
         $complaints = Complaint::with(['type', 'category', 'user'])->where('kode', 'like', "%" . $keyword . "%")->where('title', 'like', "%" . $keyword . "%")->where('privacy', '!=', 3)->paginate(10);
-        $categories = Category::get();
+        $categories = Category::limit(10)->get();
+        $recent = Complaint::with(['type', 'category', 'user'])->where('privacy', '!=', 3)->limit(5)->latest()->get();
 
         $date = Carbon::parse($complaint->created_at)->locale('id');
         $date->settings(['formatFunction' => 'translatedFormat']);
         $fdate = $date->format('l, j F Y');
 
-        return view('pages.frontend.search', compact('complaints', 'categories', 'fdate'));
+        return view('pages.frontend.search', compact('complaints', 'categories', 'recent', 'fdate'));
     }
 
     public function edit($id)
