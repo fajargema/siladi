@@ -91,7 +91,7 @@ class FrontendController extends Controller
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Username = 'fgemar72@gmail.com';
-            $mail->Password = 'hdwipxpoblpfhldu';
+            $mail->Password = '';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
@@ -108,7 +108,6 @@ class FrontendController extends Controller
 
             $mail->send();
 
-            $request->session()->flash('status', 'Terima kasih, kami sudah menerima email anda.');
             return view('pages.frontend.contact');
         } catch (Exception $e) {
             echo 'Message could not be sent.';
