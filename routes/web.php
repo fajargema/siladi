@@ -23,6 +23,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/simpan-inf', [FrontendController::class, 'simpanInf'])->name('simpanInf');
     Route::post('/comment', [FrontendController::class, 'comment'])->name('comment');
 
+    Route::get('/kategori/{id}', [FrontendController::class, 'category'])->name('category');
+
     Route::get('/search', [FrontendController::class, 'search'])->name('search');
 
     Route::get('/laporan-saya/{users_id}', [FrontendController::class, 'myReport'])->name('myReport');

@@ -9,7 +9,7 @@
 
             <div class="col-lg-8 entries">
 
-              @foreach ($reports as $item)
+              @foreach ($report as $item)
               <article class="entry">
 
                 <!-- <div class="entry-img">
@@ -35,7 +35,7 @@
                           datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
                     <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
                         <a href="{{ route('details', $item->slug) }}">
-                            {{ $total }} Comments
+                            1 Comments
                         </a>
                     </li>
                   </ul>
