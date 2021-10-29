@@ -186,4 +186,11 @@ class FEReportController extends Controller
 
         return redirect()->route('myReport', Auth::user()->id);
     }
+
+    public function delete($id)
+    {
+        Complaint::find($id)->delete();
+
+        return redirect()->route('myReport', Auth::user()->id);
+    }
 }

@@ -70,8 +70,15 @@
                                     {{ $item->description }}
                                     </p>
                                     <div class="read-more">
-                                    <a href="{{ route('edit-pen', $item->id) }}">Edit</a>
-                                    <a href="{{ route('details', $item->slug) }}">Read More</a>
+                                        <form class="inline-block mb-2" action="{{ route('delete-pen', $item->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger">
+                                                    Hapus
+                                            </button>
+                                        </form>
+                                        <a href="{{ route('edit-pen', $item->id) }}">Edit</a>
+                                        <a href="{{ route('details', $item->slug) }}">Detail</a>
                                     </div>
                                 </div>
 
