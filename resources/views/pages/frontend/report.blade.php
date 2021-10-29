@@ -33,9 +33,9 @@
                     </li>
                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
                           datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
+                    <li class="d-flex align-items-center"><i class="bi bi-upc-scan"></i>
                         <a href="{{ route('details', $item->slug) }}">
-                            {{ $total }} Comments
+                            {{ $item->kode }}
                         </a>
                     </li>
                   </ul>
@@ -43,7 +43,7 @@
 
                 <div class="entry-content">
                   <p>
-                    {{ $item->description }}
+                    {!! Str::limit($item->description, 70, '...'); !!}
                   </p>
                   <div class="read-more">
                     <a href="{{ route('details', $item->slug) }}">Read More</a>
@@ -87,7 +87,7 @@
                 <h3 class="sidebar-title">Recent Posts</h3>
                 <div class="sidebar-item recent-posts">
 
-                  @foreach ($reports as $item)
+                  @foreach ($recent as $item)
                   <div class="post-item">
                     <h4><a href="{{ route('details', $item->slug) }}">{{ $item->title }}</a></h4>
                     <time datetime="{{ $fdate }}">{{ $fdate }}</time>

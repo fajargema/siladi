@@ -27,21 +27,21 @@ class FrontendController extends Controller
 
     public function report(Complaint $complaint)
     {
-        $categories = Category::get();
+        $categories = Category::limit(10)->get();
         $reports = Complaint::with(['type', 'category', 'user'])->where('privacy', '!=', 3)->latest()->simplePaginate(10);
-        $total = Comment::where('reports_id', $complaint->id)->count();
+        $recent = Complaint::with(['type', 'category', 'user'])->where('privacy', '!=', 3)->limit(5)->latest()->get();
 
         $date = Carbon::parse($complaint->created_at)->locale('id');
         $date->settings(['formatFunction' => 'translatedFormat']);
         $fdate = $date->format('l, j F Y');
 
-        return view('pages.frontend.report', compact('reports', 'categories', 'fdate', 'total'));
+        return view('pages.frontend.report', compact('reports', 'categories', 'recent', 'fdate'));
     }
 
     public function details(Complaint $complaint, $slug)
     {
-        $categories = Category::get();
-        $reports = Complaint::get();
+        $categories = Category::limit(10)->get();
+        $reports = Complaint::limit(5)->get();
         $report = Complaint::with(['type', 'category', 'user'])->where('slug', $slug)->firstOrFail();
         $comment = Comment::with(['complaint', 'user'])->where('reports_id', $report->id)->get();
         $total = Comment::where('reports_id', $report->id)->count();

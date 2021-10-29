@@ -57,9 +57,9 @@
                                     </li>
                                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
                                             datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
-                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
+                                    <li class="d-flex align-items-center"><i class="bi bi-upc-scan"></i>
                                         <a href="{{ route('details', $item->slug) }}">
-                                            2 Comments
+                                            {{ $item->kode }}
                                         </a>
                                     </li>
                                     </ul>
@@ -67,7 +67,7 @@
 
                                 <div class="entry-content">
                                     <p>
-                                    {{ $item->description }}
+                                        {!! Str::limit($item->description, 70, '...'); !!}
                                     </p>
                                     <div class="read-more">
                                         <form class="inline-block mb-2" action="{{ route('delete-pen', $item->id) }}" method="POST">
@@ -117,9 +117,9 @@
                                     </li>
                                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
                                             datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
-                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
+                                    <li class="d-flex align-items-center"><i class="bi bi-upc-scan"></i>
                                         <a href="{{ route('details', $item->slug) }}">
-                                            2 Comments
+                                            {{ $item->kode }}
                                         </a>
                                     </li>
                                     </ul>
@@ -127,10 +127,18 @@
 
                                 <div class="entry-content">
                                     <p>
-                                    {{ $item->description }}
+                                        {!! Str::limit($item->description, 70, '...'); !!}
                                     </p>
                                     <div class="read-more">
-                                    <a href="{{ route('details', $item->slug) }}">Read More</a>
+                                        <form class="inline-block mb-2" action="{{ route('delete-pen', $item->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger">
+                                                    Hapus
+                                            </button>
+                                        </form>
+                                        <a href="{{ route('edit-pen', $item->id) }}">Edit</a>
+                                        <a href="{{ route('details', $item->slug) }}">Detail</a>
                                     </div>
                                 </div>
 
@@ -169,9 +177,9 @@
                                         </li>
                                         <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
                                                 datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
+                                        <li class="d-flex align-items-center"><i class="bi bi-upc-scan"></i>
                                             <a href="{{ route('details', $item->slug) }}">
-                                                2 Comments
+                                                {{ $item->kode }}
                                             </a>
                                         </li>
                                         </ul>
@@ -179,10 +187,18 @@
 
                                     <div class="entry-content">
                                         <p>
-                                        {{ $item->description }}
+                                            {!! Str::limit($item->description, 70, '...'); !!}
                                         </p>
                                         <div class="read-more">
-                                        <a href="{{ route('details', $item->slug) }}">Read More</a>
+                                            <form class="inline-block mb-2" action="{{ route('delete-pen', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-danger">
+                                                        Hapus
+                                                </button>
+                                            </form>
+                                            <a href="{{ route('edit-pen', $item->id) }}">Edit</a>
+                                            <a href="{{ route('details', $item->slug) }}">Detail</a>
                                         </div>
                                     </div>
 
@@ -221,9 +237,9 @@
                                         </li>
                                         <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('details', $item->slug) }}"><time
                                                 datetime="{{ $fdate }}">{{ $fdate }}</time></a></li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
+                                        <li class="d-flex align-items-center"><i class="bi bi-upc-scan"></i>
                                             <a href="{{ route('details', $item->slug) }}">
-                                                2 Comments
+                                                {{ $item->kode }}
                                             </a>
                                         </li>
                                         </ul>
@@ -231,10 +247,18 @@
 
                                     <div class="entry-content">
                                         <p>
-                                        {{ $item->description }}
+                                            {!! Str::limit($item->description, 70, '...'); !!}
                                         </p>
                                         <div class="read-more">
-                                        <a href="{{ route('details', $item->slug) }}">Read More</a>
+                                            <form class="inline-block mb-2" action="{{ route('delete-pen', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-danger">
+                                                        Hapus
+                                                </button>
+                                            </form>
+                                            <a href="{{ route('edit-pen', $item->id) }}">Edit</a>
+                                            <a href="{{ route('details', $item->slug) }}">Detail</a>
                                         </div>
                                     </div>
 
@@ -283,7 +307,7 @@
                 <h3 class="sidebar-title">Recent Posts</h3>
                 <div class="sidebar-item recent-posts">
 
-                  @foreach ($report as $item)
+                  @foreach ($recent as $item)
                   <div class="post-item">
                     <h4><a href="{{ route('details', $item->slug) }}">{{ $item->title }}</a></h4>
                     <time datetime="{{ $fdate }}">{{ $fdate }}</time>

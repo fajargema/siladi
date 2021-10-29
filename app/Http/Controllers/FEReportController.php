@@ -144,8 +144,9 @@ class FEReportController extends Controller
 
     public function myReport(Complaint $complaint, $users_id)
     {
-        $categories = Category::get();
+        $categories = Category::limit(10)->get();
         $report = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->simplePaginate(10);
+        $recent = Complaint::with(['type', 'category', 'user'])->where('privacy', '!=', 3)->limit(5)->latest()->get();
         $wait = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->where('status', 1)->simplePaginate(10);
         $process = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->where('status', 2)->simplePaginate(10);
         $done = Complaint::with(['type', 'category', 'user'])->where('users_id', $users_id)->where('status', 3)->simplePaginate(10);
@@ -154,7 +155,7 @@ class FEReportController extends Controller
         $date->settings(['formatFunction' => 'translatedFormat']);
         $fdate = $date->format('l, j F Y');
 
-        return view('pages.frontend.me.index', compact('report', 'categories', 'wait', 'process', 'done', 'fdate'));
+        return view('pages.frontend.me.index', compact('report', 'categories', 'recent', 'wait', 'process', 'done', 'fdate'));
     }
 
     public function search(Request $request, Complaint $complaint)
