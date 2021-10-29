@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\Complaint;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class FEReportController extends Controller
@@ -167,5 +168,22 @@ class FEReportController extends Controller
         $fdate = $date->format('l, j F Y');
 
         return view('pages.frontend.search', compact('complaints', 'categories', 'fdate'));
+    }
+
+    public function edit($id)
+    {
+        $category = Category::all();
+        $report = Complaint::with(['type', 'category', 'user'])->where('id', $id)->firstOrFail();
+
+        return view('pages.frontend.me.edit', compact('report', 'category'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->all();
+
+        Complaint::find($id)->update($data);
+
+        return redirect()->route('myReport', Auth::user()->id);
     }
 }

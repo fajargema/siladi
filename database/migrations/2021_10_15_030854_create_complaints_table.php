@@ -19,7 +19,7 @@ class CreateComplaintsTable extends Migration
             $table->string('kode')->index();
             $table->string('title');
             $table->longText('description');
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->string('location');
             $table->bigInteger('types_id');
             $table->bigInteger('categories_id');

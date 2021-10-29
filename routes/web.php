@@ -24,6 +24,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/simpan-pen', [FEReportController::class, 'simpanPen'])->name('simpanPen');
     Route::post('/simpan-asp', [FEReportController::class, 'simpanAsp'])->name('simpanAsp');
     Route::post('/simpan-inf', [FEReportController::class, 'simpanInf'])->name('simpanInf');
+    Route::get('/edit/{id}', [FEReportController::class, 'edit'])->name('edit-pen');
+    Route::put('/update-laporan/{id}', [FEReportController::class, 'update'])->name('update-pen');
     Route::post('/comment', [FEReportController::class, 'comment'])->name('comment');
 
     Route::get('/search', [FEReportController::class, 'search'])->name('search');

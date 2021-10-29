@@ -70,6 +70,7 @@
                                     {{ $item->description }}
                                     </p>
                                     <div class="read-more">
+                                    <a href="{{ route('edit-pen', $item->id) }}">Edit</a>
                                     <a href="{{ route('details', $item->slug) }}">Read More</a>
                                     </div>
                                 </div>
