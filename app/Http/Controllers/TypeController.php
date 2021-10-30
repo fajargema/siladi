@@ -19,23 +19,7 @@ class TypeController extends Controller
         if (request()->ajax()) {
             $query = Type::query();
             return DataTables::of($query)
-                ->addColumn('action', function ($item) {
-                    return '
-                        <a href="' . route('dashboard.type.edit', $item->id) . '"
-                            class="bg-gray-800 hover:bg-black text-white font-bold py-1 px-2 m-1 rounded shadow-lg">
-                            <i class="bx bxs-pencil"></i> Edit
-                        </a>
-                        <form class="inline-block" action="' . route('dashboard.type.destroy', $item->id) . '" method="POST">
-                            <button type="submit"
-                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 m-1 rounded shadow-lg">
-                                    <i class="bx bx-trash"></i> Hapus
-                            </button>
-                        ' . method_field('delete') . csrf_field() . '
-                        </form>
-                    ';
-                })
                 ->addIndexColumn()
-                ->rawColumns(['action'])
                 ->make();
         }
         return view('pages.dashboard.type.index');
@@ -48,7 +32,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        return view('pages.dashboard.type.create');
+        //
     }
 
     /**
@@ -59,11 +43,7 @@ class TypeController extends Controller
      */
     public function store(TypeRequest $request)
     {
-        $data = $request->all();
-
-        Type::create($data);
-
-        return redirect()->route('dashboard.type.index');
+        //
     }
 
     /**
@@ -85,7 +65,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        return view('pages.dashboard.type.edit', compact('type'));
+        //
     }
 
     /**
@@ -97,11 +77,7 @@ class TypeController extends Controller
      */
     public function update(TypeRequest $request, Type $type)
     {
-        $data = $request->all();
-
-        $type->update($data);
-
-        return redirect()->route('dashboard.type.index');
+        //
     }
 
     /**
@@ -112,8 +88,6 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        $type->delete();
-
-        return redirect()->route('dashboard.type.index');
+        //
     }
 }

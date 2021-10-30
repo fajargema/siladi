@@ -7,7 +7,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FEReportController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\InformationRequestController;
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,7 +37,7 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
     Route::middleware(['admin'])->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
 
-        Route::resource('type', TypeController::class);
+        Route::resource('type', TypeController::class)->only('index');
         Route::resource('category', CategoryController::class);
         Route::resource('aspiration', AspirationController::class);
         Route::post('/proses-asp/{id}', [AspirationController::class, 'setProses'])->name('proses-asp');
