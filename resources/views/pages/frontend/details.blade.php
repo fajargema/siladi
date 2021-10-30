@@ -88,7 +88,7 @@
                 <div class="sidebar-item categories">
                   <ul>
                     @foreach ($categories as $cat)
-                        <li><a href="#">{{ $cat->name }}
+                        <li><a href="{{ route('category', $cat->id) }}">{{ $cat->name }}
                              {{-- <span>(25)</span> --}}
                         </a></li>
                     @endforeach
