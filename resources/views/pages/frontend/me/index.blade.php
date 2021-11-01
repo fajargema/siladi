@@ -17,22 +17,22 @@
                     <ul class="nav nav-tabs row d-flex">
                         <li class="nav-item col-3">
                         <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
-                            <h4 class="d-none d-lg-block">Semua</h4>
+                            <h4 class="d-lg-block"><strong>Semua</strong></h4>
                         </a>
                         </li>
                         <li class="nav-item col-3">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
-                            <h4 class="d-none d-lg-block">Belum</h4>
+                            <h4 class="d-lg-block"><strong>Belum</strong></h4>
                         </a>
                         </li>
                         <li class="nav-item col-3">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
-                            <h4 class="d-none d-lg-block">Proses</h4>
+                            <h4 class="d-lg-block"><strong>Proses</strong></h4>
                         </a>
                         </li>
                         <li class="nav-item col-3">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
-                            <h4 class="d-none d-lg-block">Selesai</h4>
+                            <h4 class="d-lg-block"><strong>Selesai</strong></h4>
                         </a>
                         </li>
                     </ul>

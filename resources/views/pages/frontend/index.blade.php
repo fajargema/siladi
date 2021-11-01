@@ -76,20 +76,17 @@
           <ul class="nav nav-tabs row d-flex">
             <li class="nav-item col-4">
               <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
-                <i class="ri-gps-line"></i>
-                <h4 class="d-none d-lg-block">PENGADUAN</h4>
+                <h4 class="d-lg-block"><strong>PENGADUAN</strong></h4>
               </a>
             </li>
             <li class="nav-item col-4">
               <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
-                <i class="ri-body-scan-line"></i>
-                <h4 class="d-none d-lg-block">ASPIRASI</h4>
+                <h4 class="d-lg-block"><strong>ASPIRASI</strong></h4>
               </a>
             </li>
             <li class="nav-item col-4">
               <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
-                <i class="ri-sun-line"></i>
-                <h4 class="d-none d-lg-block">PERMINTAAN INFORMASI</h4>
+                <h4 class="d-lg-block"><strong>PERMINTAAN INFORMASI</strong></h4>
               </a>
             </li>
           </ul>

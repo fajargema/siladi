@@ -728,6 +728,7 @@ section {
     transition: 0.3s;
     color: #111111;
     box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+    border-color: #e03a3c;
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -741,8 +742,7 @@ section {
 }
 
 .tabs .nav-link h4 {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 12px;
     margin: 0;
 }
 
@@ -1543,8 +1543,8 @@ section {
     margin: 0;
 }
 
-.blog .entry .entry-meta ul li+li {
-    padding-left: 20px;
+.blog .entry .entry-meta li {
+    margin-left: 10px;
 }
 
 .blog .entry .entry-meta i {

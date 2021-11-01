@@ -23,7 +23,6 @@
                 <li class="dropdown"><a href="#"> <img src="{{ asset('frontend/img/male.png') }}" alt="User Image">
                     <span>{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                    <li><a href="{{ route('profile.show') }}">Profile</a></li>
                     <li><a href="{{ route('myReport', Auth::user()->id) }}">Laporan Saya</a></li>
                     <hr>
                     <li>
