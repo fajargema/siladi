@@ -100,7 +100,7 @@ class ComplaintController extends Controller
 
             Complaint::create([
                 'attachment'     => $attachment->hashName(),
-                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
+                'kode' => sprintf("%03s", abs($akhir + 1)) . '-' . $awal . '-' . $dua . '-' . date('dmY'),
                 'title'     => $request->title,
                 'description'   => $request->description,
                 'date'   => $request->date,
@@ -114,7 +114,7 @@ class ComplaintController extends Controller
         } else {
             Complaint::create([
                 'attachment'     => $request->attachment,
-                'kode' => sprintf("%03s", abs($akhir + 1)) . '/' . $awal . '/' . $dua . '/' . date('dmY'),
+                'kode' => sprintf("%03s", abs($akhir + 1)) . '-' . $awal . '-' . $dua . '-' . date('dmY'),
                 'title'     => $request->title,
                 'description'   => $request->description,
                 'date'   => $request->date,
